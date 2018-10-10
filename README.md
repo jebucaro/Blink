@@ -43,13 +43,13 @@ Por ejemplo, el siguiente archivo de configuración:
                 "name": "Manuales"
             },
             {
-                "name": "Documentación TÃ©cnica"
+                "name": "Documentación Técnica"
             }
         ]
     }
 ]
 ```
-Creará¡ la siguente estructura de carpetas dento de la carpeta seleccionada, en este caso la carpeta raíz *Ejemplo*:
+Creará la siguente estructura de carpetas dento de la carpeta seleccionada, en este caso la carpeta raíz *Ejemplo*:
 
 ![Ejemplo](./ejemplo.jpg)
 
