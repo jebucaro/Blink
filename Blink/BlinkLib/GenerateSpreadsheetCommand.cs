@@ -45,6 +45,8 @@ namespace BlinkLib
 
         public GenerateSpreadsheetCommand(WorkingDirectory workingDirectory) : base(workingDirectory){ }
 
+        public string FileName { get; private set; }
+
         protected override void ExecuteTask()
         {
             _map.Add(LABEL_ALL, new List<CustomFileInfo>());
@@ -232,7 +234,8 @@ namespace BlinkLib
 
             try
             {
-                newFile = new FileInfo(GenerateTemporaryFileName("xlsx"));
+                this.FileName = GenerateTemporaryFileName("xlsx");
+                newFile = new FileInfo(this.FileName);
                 pck = new ExcelPackage(newFile);
             }
             catch (Exception)
