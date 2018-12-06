@@ -28,38 +28,21 @@ namespace BlinkLib
 {
     public abstract class BlinkCommand
     {
-        protected WorkingDirectory workingDirectory;
+        protected WorkingDirectory WorkingDirectory;
 
-        public BlinkCommand(WorkingDirectory directory)
+        protected BlinkCommand(WorkingDirectory directory)
         {
-            if (directory is null)
-                throw new ArgumentNullException("workingDirectory");
-
-            this.workingDirectory = directory;
+            WorkingDirectory = directory ?? throw new ArgumentNullException(nameof(directory));
         }
 
         protected abstract void LoadConfiguration();
         protected abstract void ExecuteTask();
 
-        public void Excecute()
+        public void Execute()
         {
-            try
-            {
-                this.LoadConfiguration();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            LoadConfiguration();
 
-            try
-            {
-                this.ExecuteTask();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            ExecuteTask();
         }
     }
 }

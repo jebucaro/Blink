@@ -30,27 +30,27 @@ namespace BlinkLib
 {
     public class WorkingDirectory
     {
-        public string Path { get; private set; }
-
-        public string Name { get; private set; }
-
         public WorkingDirectory(string path)
         {
-            if (String.IsNullOrWhiteSpace(path))
-                throw new ArgumentNullException("WorkingDirectory is empty.");
+            if (string.IsNullOrWhiteSpace(path))
+                throw new ArgumentNullException("path");
 
-            Regex containsABadCharacter = new Regex(
+            var containsABadCharacter = new Regex(
                 "[" + Regex.Escape(new string(System.IO.Path.GetInvalidPathChars())) + "]");
 
             if (containsABadCharacter.IsMatch(path))
-                throw new FormatException(String.Format("WorkingDirectory \"{0}\" has invalid path characters.", path));
+                throw new FormatException($"WorkingDirectory \"{path}\" has invalid path characters.");
 
             if (!Directory.Exists(path))
-                throw new DirectoryNotFoundException(String.Format("WorkingDirectory \"{0}\" doesn't exists", path));
+                throw new DirectoryNotFoundException($"WorkingDirectory \"{path}\" doesn't exists");
 
-            this.Path = path;
+            Path = path;
 
             //this.Name = System.IO.Path.GetFileName(this.Path);
         }
+
+        public string Path { get; }
+
+        public string Name { get; private set; }
     }
 }

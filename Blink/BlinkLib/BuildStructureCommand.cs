@@ -22,20 +22,22 @@
  * 
  */
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace BlinkLib
 {
     public class BuildStructureCommand : BlinkCommand
     {
-        const string CONFIGURATION_FILE = "branch.settings.json";
+        private const string ConfigurationFile = "branch.settings.json";
 
-        List<Branch> _folderStructure;
+        private List<Branch> _folderStructure;
 
-        public BuildStructureCommand(WorkingDirectory workingDirectory) : base(workingDirectory){ }
+        public BuildStructureCommand(WorkingDirectory workingDirectory) : base(workingDirectory)
+        {
+        }
 
         protected override void ExecuteTask()
         {
@@ -46,43 +48,43 @@ namespace BlinkLib
         {
             try
             {
-                using (StreamReader r = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, CONFIGURATION_FILE)))
+                using (var r =
+                    new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigurationFile)))
                 {
-                    string json = r.ReadToEnd();
+                    var json = r.ReadToEnd();
                     _folderStructure = JsonConvert.DeserializeObject<List<Branch>>(json);
                 }
             }
             catch (FileNotFoundException)
             {
-                throw new BlinkException($"Unable to find configuration file: \"{CONFIGURATION_FILE}\".");
+                throw new BlinkException($"Unable to find configuration file: \"{ConfigurationFile}\".");
             }
             catch (DirectoryNotFoundException)
             {
-                throw new BlinkException($"Unable to access Blink application directory \"{AppDomain.CurrentDomain.BaseDirectory}\".");
+                throw new BlinkException(
+                    $"Unable to access Blink application directory \"{AppDomain.CurrentDomain.BaseDirectory}\".");
             }
             catch (JsonException)
             {
-                throw new BlinkException($"There was an error while parsing configuration file: \"{CONFIGURATION_FILE}\".");
+                throw new BlinkException(
+                    $"There was an error while parsing configuration file: \"{ConfigurationFile}\".");
             }
             catch (FormatException ex)
             {
-                throw new BlinkException($"Invalid Directory name: \"{ex.Message}\", check your \"{CONFIGURATION_FILE}\" file.");
-            }
-            catch (Exception)
-            {
-                throw;
+                throw new BlinkException(
+                    $"Invalid Directory name: \"{ex.Message}\", check your \"{ConfigurationFile}\" file.");
             }
         }
 
         private void CreateFolder()
         {
-            string currentPath = String.Empty;
+            var currentPath = string.Empty;
 
             try
             {
-                foreach (Branch currentBranch in _folderStructure)
+                foreach (var currentBranch in _folderStructure)
                 {
-                    currentPath = Path.Combine(this.workingDirectory.Path, currentBranch.Name);
+                    currentPath = Path.Combine(WorkingDirectory.Path, currentBranch.Name);
 
                     Directory.CreateDirectory(currentPath);
 
@@ -90,10 +92,6 @@ namespace BlinkLib
                         CreateFolder(currentBranch, currentBranch.Name);
                 }
             }
-            catch (BlinkException)
-            {
-                throw;
-            }
             catch (UnauthorizedAccessException)
             {
                 throw new BlinkException($"Directory \"{currentPath}\" is not currently accesible.");
@@ -108,23 +106,20 @@ namespace BlinkLib
             }
             catch (NotSupportedException)
             {
-                throw new BlinkException($"The path to the Directory \"{currentPath}\" contains a colon character (:) that is not a part of a drive label.");
-            }
-            catch (Exception)
-            {
-                throw;
+                throw new BlinkException(
+                    $"The path to the Directory \"{currentPath}\" contains a colon character (:) that is not a part of a drive label.");
             }
         }
 
         private void CreateFolder(Branch node, string rootPath)
         {
-            string currentPath = String.Empty;
+            var currentPath = string.Empty;
 
             try
             {
-                foreach (Branch currentBranch in node.Branches)
+                foreach (var currentBranch in node.Branches)
                 {
-                    currentPath = Path.Combine(this.workingDirectory.Path, rootPath, currentBranch.Name);
+                    currentPath = Path.Combine(WorkingDirectory.Path, rootPath, currentBranch.Name);
 
                     Directory.CreateDirectory(currentPath);
 
@@ -132,10 +127,6 @@ namespace BlinkLib
                         CreateFolder(currentBranch, Path.Combine(rootPath, currentBranch.Name));
                 }
             }
-            catch (BlinkException)
-            {
-                throw;
-            }
             catch (UnauthorizedAccessException)
             {
                 throw new BlinkException($"Directory \"{currentPath}\" is not currently accesible.");
@@ -150,11 +141,8 @@ namespace BlinkLib
             }
             catch (NotSupportedException)
             {
-                throw new BlinkException($"The path to the Directory \"{currentPath}\" contains a colon character (:) that is not a part of a drive label.");
-            }
-            catch (Exception)
-            {
-                throw;
+                throw new BlinkException(
+                    $"The path to the Directory \"{currentPath}\" contains a colon character (:) that is not a part of a drive label.");
             }
         }
     }

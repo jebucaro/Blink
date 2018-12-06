@@ -1,11 +1,14 @@
-﻿namespace Blink
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Blink
 {
     partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -296,23 +299,23 @@
 
         #endregion
 
-        private System.ComponentModel.BackgroundWorker bgWorker;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.LinkLabel linkLabel4;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.LinkLabel linkLabel5;
+        private BackgroundWorker bgWorker;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private TabPage tabPage3;
+        private TextBox textBox1;
+        private TabPage tabPage4;
+        private TextBox textBox2;
+        private TabPage tabPage5;
+        private TextBox textBox3;
+        private PictureBox pictureBox1;
+        private LinkLabel linkLabel1;
+        private LinkLabel linkLabel2;
+        private LinkLabel linkLabel3;
+        private LinkLabel linkLabel4;
+        private Label label2;
+        private Label label3;
+        private LinkLabel linkLabel5;
     }
 }

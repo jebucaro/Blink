@@ -30,11 +30,13 @@ namespace BlinkLib
 {
     public class CleanseStructureCommand : BlinkCommand
     {
-        public CleanseStructureCommand(WorkingDirectory workingDirectory) : base(workingDirectory){}
+        public CleanseStructureCommand(WorkingDirectory workingDirectory) : base(workingDirectory)
+        {
+        }
 
         protected override void ExecuteTask()
         {
-            CleanseFolder(workingDirectory.Path);
+            CleanseFolder(WorkingDirectory.Path);
         }
 
         protected override void LoadConfiguration()
@@ -44,11 +46,11 @@ namespace BlinkLib
 
         private void CleanseFolder(string startLocation)
         {
-            string folder = String.Empty;
+            var folder = string.Empty;
 
             try
             {
-                foreach (string currentDirectory in Directory.GetDirectories(startLocation))
+                foreach (var currentDirectory in Directory.GetDirectories(startLocation))
                 {
                     folder = currentDirectory;
 
@@ -69,10 +71,6 @@ namespace BlinkLib
             catch (DirectoryNotFoundException)
             {
                 throw new BlinkException($"Directory not found \"{folder}\".");
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
     }
