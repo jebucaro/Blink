@@ -31,18 +31,18 @@ using Newtonsoft.Json;
 
 namespace BlinkLib
 {
-    class Branch
+    internal class Branch
     {
         private string _name;
 
         [JsonProperty("name")]
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
-                Regex containsABadCharacter = new Regex(
-                "[" + Regex.Escape(new string(Path.GetInvalidPathChars())) + "]");
+                var containsABadCharacter = new Regex(
+                    "[" + Regex.Escape(new string(Path.GetInvalidPathChars())) + "]");
 
                 if (containsABadCharacter.IsMatch(value))
                     throw new FormatException(value);
@@ -51,14 +51,12 @@ namespace BlinkLib
             }
         }
 
-        [JsonProperty("label")]
-        public string Label { get; set; }
+        [JsonProperty("label")] public string Label { get; set; }
 
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool Browsable { get; set; }
 
-        [JsonProperty("branch")]
-        public List<Branch> Branches { get; set; }
+        [JsonProperty("branch")] public List<Branch> Branches { get; set; }
     }
 }

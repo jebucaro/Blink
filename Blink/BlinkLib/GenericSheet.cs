@@ -22,28 +22,27 @@
  * 
  */
 
+using System.Collections.Generic;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
-using System.Collections.Generic;
 
 namespace BlinkLib
 {
-    class GenericSheet
+    internal class GenericSheet
     {
+        private const string SheetHeaderNumber = "Number";
+        private const string SheetHeaderFullname = "File Name";
+        private const string SheetHeaderExtension = "Extension";
+        private const string SheetHeaderPath = "Relative Path";
+        private const string SheetHeaderDescription = "Description";
 
-        const string SHEET_HEADER_NUMBER = "Number";
-        const string SHEET_HEADER_FULLNAME = "File Name";
-        const string SHEET_HEADER_EXTENSION = "Extension";
-        const string SHEET_HEADER_PATH = "Relative Path";
-        const string SHEET_HEADER_DESCRIPTION = "Description";
+        private const int SheetInitialRow = 1;
 
-        const int SHEET_INITIAL_ROW = 1;
-
-        const int SHEET_COLUMN_NUMBER = 1;
-        const int SHEET_COLUMN_FULLNAME = 2;
-        const int SHEET_COLUMN_EXTENSION = 3;
-        const int SHEET_COLUMN_DESCRIPTION = 4;
-        const int SHEET_COLUMN_PATH = 5;
+        private const int SheetColumnNumber = 1;
+        private const int SheetColumnFullname = 2;
+        private const int SheetColumnExtension = 3;
+        private const int SheetColumnDescription = 4;
+        private const int SheetColumnPath = 5;
 
         public string SheetName { get; set; }
         public ExcelPackage WorkingPackage { get; set; }
@@ -52,38 +51,38 @@ namespace BlinkLib
 
         public void Generate()
         {
-            ExcelWorksheet ws = WorkingPackage.Workbook.Worksheets.Add(SheetName);
+            var ws = WorkingPackage.Workbook.Worksheets.Add(SheetName);
 
-            int currentRow = SHEET_INITIAL_ROW;
+            var currentRow = SheetInitialRow;
 
             // Table Headers
 
-            ws.Cells[currentRow, SHEET_COLUMN_NUMBER].Value = SHEET_HEADER_NUMBER;
-            ws.Cells[currentRow, SHEET_COLUMN_FULLNAME].Value = SHEET_HEADER_FULLNAME;
-            ws.Cells[currentRow, SHEET_COLUMN_EXTENSION].Value = SHEET_HEADER_EXTENSION;
-            ws.Cells[currentRow, SHEET_COLUMN_DESCRIPTION].Value = SHEET_HEADER_DESCRIPTION;
-            ws.Cells[currentRow, SHEET_COLUMN_PATH].Value = SHEET_HEADER_PATH;
+            ws.Cells[currentRow, SheetColumnNumber].Value = SheetHeaderNumber;
+            ws.Cells[currentRow, SheetColumnFullname].Value = SheetHeaderFullname;
+            ws.Cells[currentRow, SheetColumnExtension].Value = SheetHeaderExtension;
+            ws.Cells[currentRow, SheetColumnDescription].Value = SheetHeaderDescription;
+            ws.Cells[currentRow, SheetColumnPath].Value = SheetHeaderPath;
 
             currentRow++;
 
             // Table Content
 
-            foreach (CustomFileInfo customFileInfo in Content)
+            foreach (var customFileInfo in Content)
             {
-                ws.Cells[currentRow, SHEET_COLUMN_NUMBER].Value = currentRow - SHEET_INITIAL_ROW;
-                ws.Cells[currentRow, SHEET_COLUMN_FULLNAME].Value = customFileInfo.FileName;
-                ws.Cells[currentRow, SHEET_COLUMN_EXTENSION].Value = customFileInfo.Extension;
-                ws.Cells[currentRow, SHEET_COLUMN_PATH].Value = customFileInfo.RelativePath;
+                ws.Cells[currentRow, SheetColumnNumber].Value = currentRow - SheetInitialRow;
+                ws.Cells[currentRow, SheetColumnFullname].Value = customFileInfo.FileName;
+                ws.Cells[currentRow, SheetColumnExtension].Value = customFileInfo.Extension;
+                ws.Cells[currentRow, SheetColumnPath].Value = customFileInfo.RelativePath;
 
                 currentRow++;
             }
 
             // Create a Table
 
-            using (ExcelRange range = ws.Cells[SHEET_INITIAL_ROW, SHEET_COLUMN_NUMBER, currentRow - 1, SHEET_COLUMN_PATH])
+            using (var range = ws.Cells[SheetInitialRow, SheetColumnNumber, currentRow - 1, SheetColumnPath])
             {
-                ExcelTableCollection tblCollection = ws.Tables;
-                ExcelTable table = tblCollection.Add(range, $"Table{this.TableNumber}");
+                var tblCollection = ws.Tables;
+                var table = tblCollection.Add(range, $"Table{TableNumber}");
                 table.TableStyle = TableStyles.Dark11;
             }
 

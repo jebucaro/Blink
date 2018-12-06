@@ -22,32 +22,34 @@
  * 
  */
 
-using Newtonsoft.Json;
-using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using OfficeOpenXml;
 
 namespace BlinkLib
 {
     public class GenerateSpreadsheetCommand : BlinkCommand
     {
+        private const string ConfigurationFile = "branch.settings.json";
+        private const string LabelAll = "(All)";
 
-        const string CONFIGURATION_FILE = "branch.settings.json";
-        const string LABEL_ALL = "(All)";
+        private List<Branch> _folderStructure;
 
-        List<Branch> _folderStructure;
-
-        HashSet<string> _listOfLabels;
-        Dictionary<string, List<CustomFileInfo>> _map = new Dictionary<string, List<CustomFileInfo>>();
+        private HashSet<string> _listOfLabels;
+        private Dictionary<string, List<CustomFileInfo>> _map = new Dictionary<string, List<CustomFileInfo>>();
 
         public GenerateSpreadsheetCommand(WorkingDirectory workingDirectory) : base(workingDirectory){ }
 
+        public string FileName { get; private set; }
+
         protected override void ExecuteTask()
         {
-            _map.Add(LABEL_ALL, new List<CustomFileInfo>());
+            _map.Add(LabelAll, new List<CustomFileInfo>());
 
             BrowseFiles();
             GenerateListOfLabels();
@@ -58,7 +60,7 @@ namespace BlinkLib
         {
             try
             {
-                using (StreamReader r = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, CONFIGURATION_FILE)))
+                using (StreamReader r = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigurationFile)))
                 {
                     string json = r.ReadToEnd();
                     _folderStructure = JsonConvert.DeserializeObject<List<Branch>>(json);
@@ -66,7 +68,7 @@ namespace BlinkLib
             }
             catch (FileNotFoundException)
             {
-                throw new BlinkException($"Unable to find configuration file: \"{CONFIGURATION_FILE}\".");
+                throw new BlinkException($"Unable to find configuration file: \"{ConfigurationFile}\".");
             }
             catch (DirectoryNotFoundException)
             {
@@ -74,15 +76,11 @@ namespace BlinkLib
             }
             catch (JsonException)
             {
-                throw new BlinkException($"There was an error while parsing configuration file: \"{CONFIGURATION_FILE}\".");
+                throw new BlinkException($"There was an error while parsing configuration file: \"{ConfigurationFile}\".");
             }
             catch (FormatException ex)
             {
-                throw new BlinkException($"Invalid Directory name: \"{ex.Message}\", check your \"{CONFIGURATION_FILE}\" file.");
-            }
-            catch (Exception)
-            {
-                throw;
+                throw new BlinkException($"Invalid Directory name: \"{ex.Message}\", check your \"{ConfigurationFile}\" file.");
             }
         }
 
@@ -95,16 +93,16 @@ namespace BlinkLib
                 if (!tree.Browsable)
                     continue;
 
-                string currentPath = Path.Combine(this.workingDirectory.Path, tree.Name);
+                string currentPath = Path.Combine(WorkingDirectory.Path, tree.Name);
 
                 if (!String.IsNullOrWhiteSpace(tree.Label))
                 {
-                    string currentLabel = System.Globalization.CultureInfo.InvariantCulture.TextInfo.ToTitleCase(tree.Label);
+                    string currentLabel = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(tree.Label);
 
                     if (_listOfLabels.Add(currentLabel))
                         _map.Add(currentLabel, new List<CustomFileInfo>());
 
-                    _map[currentLabel].AddRange(_map[LABEL_ALL].FindAll(cfi => cfi.FullPath.Contains(currentPath)));
+                    _map[currentLabel].AddRange(_map[LabelAll].FindAll(cfi => cfi.FullPath.Contains(currentPath)));
 
                     continue;
                 }
@@ -127,12 +125,12 @@ namespace BlinkLib
 
                 if (!String.IsNullOrWhiteSpace(branch.Label))
                 {
-                    string currentLabel = System.Globalization.CultureInfo.InvariantCulture.TextInfo.ToTitleCase(branch.Label);
+                    string currentLabel = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(branch.Label);
 
                     if (_listOfLabels.Add(currentLabel))
                         _map.Add(currentLabel, new List<CustomFileInfo>());
 
-                    _map[currentLabel].AddRange(_map[LABEL_ALL].FindAll(cfi => cfi.FullPath.Contains(currentPath)));
+                    _map[currentLabel].AddRange(_map[LabelAll].FindAll(cfi => cfi.FullPath.Contains(currentPath)));
 
                     continue;
                 }
@@ -191,61 +189,48 @@ namespace BlinkLib
 
         private void BrowseFiles()
         {
-            string[] _files;
+            string[] files;
 
             try
             {
-                _files = Directory.GetFiles(this.workingDirectory.Path, "*.*", SearchOption.AllDirectories);
+                files = Directory.GetFiles(WorkingDirectory.Path, "*.*", SearchOption.AllDirectories);
             }
             catch (UnauthorizedAccessException)
             {
-                throw new BlinkException($"There is a Directory or File inside WorkingDirectory \"{this.workingDirectory.Path}\" that is not currently accesible.");
+                throw new BlinkException($"There is a Directory or File inside WorkingDirectory \"{WorkingDirectory.Path}\" that is not currently accessible.");
             }
             catch (DirectoryNotFoundException)
             {
-                throw new BlinkException($"There is a Directory or File inside WorkingDirectory \"{this.workingDirectory.Path}\" that is not currently accesible.");
+                throw new BlinkException($"There is a Directory or File inside WorkingDirectory \"{WorkingDirectory.Path}\" that is not currently accessible.");
             }
             catch (PathTooLongException)
             {
-                throw new BlinkException($"There is a Directory or File inside WorkingDirectory \"{this.workingDirectory.Path}\" that is name is too long.");
+                throw new BlinkException($"There is a Directory or File inside WorkingDirectory \"{WorkingDirectory.Path}\" that is name is too long.");
             }
             catch (IOException)
             {
-                throw new BlinkException($"There is a Directory or File inside WorkingDirectory \"{this.workingDirectory.Path}\" that is not currently accesible.");
-            }
-            catch (Exception)
-            {
-                throw;
+                throw new BlinkException($"There is a Directory or File inside WorkingDirectory \"{WorkingDirectory.Path}\" that is not currently accessible.");
             }
 
-            if (_files.Count() == 0)
-                throw new BlinkException($"WorkingDirectory \"{this.workingDirectory.Path}\" is empty. Did you lost your files?");
+            if (!files.Any())
+                throw new BlinkException($"WorkingDirectory \"{WorkingDirectory.Path}\" is empty. Did you lost your files?");
 
-            foreach (string currentFile in _files)
-                _map[LABEL_ALL].Add(GetCustomFileInfo(currentFile, this.workingDirectory.Path));
+            foreach (string currentFile in files)
+                _map[LabelAll].Add(GetCustomFileInfo(currentFile, WorkingDirectory.Path));
         }
 
         private void GenerateExcelFile()
         {
-            FileInfo newFile;
-            ExcelPackage pck;
-
-            try
-            {
-                newFile = new FileInfo(GenerateTemporaryFileName("xlsx"));
-                pck = new ExcelPackage(newFile);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            FileName = GenerateTemporaryFileName("xlsx");
+            var newFile = new FileInfo(FileName);
+            var pck = new ExcelPackage(newFile);
 
             long tableNumber = 0;
 
             foreach (KeyValuePair<string, List<CustomFileInfo>> entry in _map)
             {
 
-                if (entry.Value.Count() <= 0)
+                if (!entry.Value.Any())
                     continue;
 
                 try
@@ -262,7 +247,7 @@ namespace BlinkLib
                 }
                 catch (Exception ex)
                 {
-                    throw new BlinkException($"There was an error while genereting the Spreadsheet file: {ex.Message}");
+                    throw new BlinkException($"There was an error while generating the Spreadsheet file: {ex.Message}");
                 }
             }
 

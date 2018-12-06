@@ -22,12 +22,14 @@
  * 
  */
 
-using BlinkLib;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using BlinkLib;
 
 namespace Blink
 {
@@ -35,35 +37,35 @@ namespace Blink
     {
         #region Declarations
 
-        const string COMMAND_STRUCTURE = "-structure";
-        const string COMMAND_CLEANSE = "-cleanse";
-        const string COMMAND_SPREADSHEET = "-spreadsheet";
+        const string CommandStructure = "-structure";
+        const string CommandCleanse = "-cleanse";
+        const string CommandSpreadsheet = "-spreadsheet";
 
-        const int TASK_COMPLETED = 100;
+        const int TaskCompleted = 100;
 
-        const int NOTIFICATION_DELAY = 4500;
+        const int NotificationDelay = 4500;
 
-        BlinkCommand blinkCommand;
-        WorkingDirectory workingDirectory;
-        NotifyIcon notification;
+        BlinkCommand _blinkCommand;
+        WorkingDirectory _workingDirectory;
+        readonly NotifyIcon notification;
 
-        string[] args;
+        string[] _args;
 
         #endregion
 
         #region AlwaysMinimizedForm
 
-        const int WM_SYSCOMMAND = 0x112;
+        const int WmSyscommand = 0x112;
 
-        const int SC_MINIMIZE = 0xF020;
-        const int SC_MAXIMIZE = 0xF030;
-        const int SC_RESTORE = 0xF120;
+        const int ScMinimize = 0xF020;
+        const int ScMaximize = 0xF030;
+        const int ScRestore = 0xF120;
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_SYSCOMMAND)
+            if (m.Msg == WmSyscommand)
             {
-                if (m.WParam == (IntPtr)SC_MAXIMIZE || m.WParam == (IntPtr)SC_RESTORE)
+                if (m.WParam == (IntPtr)ScMaximize || m.WParam == (IntPtr)ScRestore)
                 {
                     m.Result = IntPtr.Zero;
                     return;
@@ -85,9 +87,9 @@ namespace Blink
 
             InitializeComponent();
 
-            notification = new System.Windows.Forms.NotifyIcon()
+            notification = new NotifyIcon
             {
-                Icon = new Icon(this.Icon, 16, 16),
+                Icon = new Icon(Icon, 16, 16),
                 BalloonTipIcon = ToolTipIcon.None
             };
 
@@ -97,36 +99,34 @@ namespace Blink
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            args = Environment.GetCommandLineArgs();
+            _args = Environment.GetCommandLineArgs();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            if (args.Count() == 1)
-                this.WindowState = FormWindowState.Normal;
+            if (_args.Count() == 1)
+                WindowState = FormWindowState.Normal;
             else
                 bgWorker.RunWorkerAsync();
         }
 
         private void Notification_BalloonTipClicked(object sender, EventArgs e)
         {
-            if (!(notification is null))
-                notification.Dispose();
+            notification?.Dispose();
 
-            this.Close();
+            Close();
         }
 
         private void Notification_BalloonTipClosed(object sender, EventArgs e)
         {
-            if (!(notification is null))
-                notification.Dispose();
+            notification?.Dispose();
 
-            this.Close();
+            Close();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Normal);
+            TaskbarProgress.SetState(Handle, TaskbarProgress.TaskbarStates.Normal);
         }
 
         private void bgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -134,35 +134,35 @@ namespace Blink
 
             bgWorker.ReportProgress(0);
 
-            if (args.Count() != 3)
+            if (_args.Count() != 3)
                 throw new ArgumentException("Invalid arguments used to run Blink");
 
             bgWorker.ReportProgress(25);
 
-            workingDirectory = new WorkingDirectory(args[2]);
+            _workingDirectory = new WorkingDirectory(_args[2]);
 
             bgWorker.ReportProgress(50);
 
-            switch (args[1].ToLower())
+            switch (_args[1].ToLower())
             {
-                case COMMAND_SPREADSHEET:
-                    blinkCommand = new GenerateSpreadsheetCommand(workingDirectory);
+                case CommandSpreadsheet:
+                    _blinkCommand = new GenerateSpreadsheetCommand(_workingDirectory);
                     break;
-                case COMMAND_STRUCTURE:
-                    blinkCommand = new BuildStructureCommand(workingDirectory);
+                case CommandStructure:
+                    _blinkCommand = new BuildStructureCommand(_workingDirectory);
                     break;
-                case COMMAND_CLEANSE:
-                    blinkCommand = new CleanseStructureCommand(workingDirectory);
+                case CommandCleanse:
+                    _blinkCommand = new CleanseStructureCommand(_workingDirectory);
                     break;
                 default:
-                    throw new InvalidOperationException(args[1]);
+                    throw new InvalidOperationException(_args[1]);
             }
 
             bgWorker.ReportProgress(75);
 
-            blinkCommand.Excecute();
+            _blinkCommand.Execute();
 
-            bgWorker.ReportProgress(TASK_COMPLETED);
+            bgWorker.ReportProgress(TaskCompleted);
         }
 
         private void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -172,46 +172,46 @@ namespace Blink
 
             if (e.Error is null)
             {
-                notification.ShowBalloonTip(NOTIFICATION_DELAY, "Blink", "Operation completed successfully", ToolTipIcon.Info);
-                TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Normal);
+                notification.ShowBalloonTip(NotificationDelay, "Blink", "Operation completed successfully", ToolTipIcon.Info);
+                TaskbarProgress.SetState(Handle, TaskbarProgress.TaskbarStates.Normal);
             }
             else
             {
-                notification.ShowBalloonTip(NOTIFICATION_DELAY, e.Error.Source, e.Error.Message , ToolTipIcon.Error);
-                TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Error);
+                notification.ShowBalloonTip(NotificationDelay, e.Error.Source, e.Error.Message , ToolTipIcon.Error);
+                TaskbarProgress.SetState(Handle, TaskbarProgress.TaskbarStates.Error);
             }
                 
-            System.Threading.Thread.Sleep(NOTIFICATION_DELAY);
+            Thread.Sleep(NotificationDelay);
         }
 
         private void bgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            TaskbarProgress.SetValue(this.Handle, e.ProgressPercentage, TASK_COMPLETED);
+            TaskbarProgress.SetValue(Handle, e.ProgressPercentage, TaskCompleted);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.iconfinder.com/recepkutuk");
+            Process.Start("https://www.iconfinder.com/recepkutuk");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.iconfinder.com/igorverizub");
+            Process.Start("https://www.iconfinder.com/igorverizub");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.iconfinder.com/glyphlab");
+            Process.Start("https://www.iconfinder.com/glyphlab");
         }
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.iconfinder.com/recepkutuk");
+            Process.Start("https://www.iconfinder.com/recepkutuk");
         }
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://jonathanbucaro.com/2018/03/20/blink/");
+            Process.Start("https://jonathanbucaro.com/2018/03/20/blink/");
         }
     }
 }

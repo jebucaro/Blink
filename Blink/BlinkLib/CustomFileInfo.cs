@@ -24,7 +24,7 @@
 
 namespace BlinkLib
 {
-    class CustomFileInfo
+    internal class CustomFileInfo
     {
         public string FileName { get; set; }
         public string FileNameWithoutExtension { get; set; }
@@ -32,5 +32,4 @@ namespace BlinkLib
         public string RelativePath { get; set; }
         public string FullPath { get; set; }
     }
-
 }
