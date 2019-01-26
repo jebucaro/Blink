@@ -24,7 +24,7 @@
 
 namespace BlinkLib
 {
-    internal class CustomFileInfo
+    public class CustomFileInfo
     {
         public string FileName { get; set; }
         public string FileNameWithoutExtension { get; set; }

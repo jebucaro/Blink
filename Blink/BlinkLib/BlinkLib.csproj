@@ -33,8 +33,8 @@
     <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -50,13 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlinkCommand.cs" />
     <Compile Include="BlinkException.cs" />
+    <Compile Include="Blink.cs" />
     <Compile Include="Branch.cs" />
-    <Compile Include="CleanseStructureCommand.cs" />
-    <Compile Include="GenerateSpreadsheetCommand.cs" />
-    <Compile Include="BuildStructureCommand.cs" />
+    <Compile Include="CleanseStructure.cs" />
+    <Compile Include="CreateStructure.cs" />
     <Compile Include="CustomFileInfo.cs" />
+    <Compile Include="GenerateSpreadsheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GenericSheet.cs" />
     <Compile Include="WorkingDirectory.cs" />

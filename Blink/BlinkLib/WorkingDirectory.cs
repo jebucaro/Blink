@@ -30,10 +30,16 @@ namespace BlinkLib
 {
     public class WorkingDirectory
     {
+        
+
+        private Blink _blinkStrategy;
+
+        public string Path { get; }
+
         public WorkingDirectory(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
 
             var containsABadCharacter = new Regex(
                 "[" + Regex.Escape(new string(System.IO.Path.GetInvalidPathChars())) + "]");
@@ -46,11 +52,22 @@ namespace BlinkLib
 
             Path = path;
 
-            //this.Name = System.IO.Path.GetFileName(this.Path);
+            ConfigurationFile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DefaultConfigurationFile);
         }
 
-        public string Path { get; }
+        public string ConfigurationFile { get; set; }
 
-        public string Name { get; private set; }
+        public void SetBlinkStrategy(Blink strategy)
+        {
+            _blinkStrategy = strategy;
+        }
+        
+        public void Execute()
+        {
+            _blinkStrategy.WorkingDirectory = Path;
+            _blinkStrategy.ConfigurationFile = ConfigurationFile;
+
+            _blinkStrategy.Execute();
+        }
     }
 }
