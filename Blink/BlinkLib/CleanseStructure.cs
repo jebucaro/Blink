@@ -28,20 +28,16 @@ using System.Linq;
 
 namespace BlinkLib
 {
-    public class CleanseStructureCommand : BlinkCommand
+    public class CleanseStructure : Blink
     {
-        public CleanseStructureCommand(WorkingDirectory workingDirectory) : base(workingDirectory)
+        protected override void LoadConfiguration()
         {
+            // There is no configuration for this task :)
         }
 
         protected override void ExecuteTask()
         {
-            CleanseFolder(WorkingDirectory.Path);
-        }
-
-        protected override void LoadConfiguration()
-        {
-            // There is no configuration for this task :)
+            CleanseFolder(WorkingDirectory);
         }
 
         private void CleanseFolder(string startLocation)
@@ -62,7 +58,7 @@ namespace BlinkLib
             }
             catch (UnauthorizedAccessException)
             {
-                throw new BlinkException($"Directory \"{folder}\" is not currently accesible.");
+                throw new BlinkException($"Directory \"{folder}\" is not currently accessible.");
             }
             catch (PathTooLongException)
             {

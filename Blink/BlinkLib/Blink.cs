@@ -23,20 +23,25 @@
  */
 
 using System;
+using System.IO;
 
 namespace BlinkLib
 {
-    public abstract class BlinkCommand
+    public abstract class Blink
     {
-        protected WorkingDirectory WorkingDirectory;
 
-        protected BlinkCommand(WorkingDirectory directory)
-        {
-            WorkingDirectory = directory ?? throw new ArgumentNullException(nameof(directory));
-        }
+        private const string DefaultConfigurationFile = "branch.settings.json";
+
+        public string WorkingDirectory { get; set; }
+        public string ConfigurationFile { get; set; }
 
         protected abstract void LoadConfiguration();
         protected abstract void ExecuteTask();
+
+        protected Blink()
+        {
+            ConfigurationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DefaultConfigurationFile);
+        }
 
         public void Execute()
         {

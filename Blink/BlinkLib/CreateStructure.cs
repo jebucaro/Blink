@@ -29,27 +29,19 @@ using Newtonsoft.Json;
 
 namespace BlinkLib
 {
-    public class BuildStructureCommand : BlinkCommand
+    public class CreateStructure : Blink
     {
-        private const string ConfigurationFile = "branch.settings.json";
+        
 
         private List<Branch> _folderStructure;
 
-        public BuildStructureCommand(WorkingDirectory workingDirectory) : base(workingDirectory)
-        {
-        }
-
-        protected override void ExecuteTask()
-        {
-            CreateFolder();
-        }
+        public CreateStructure(){}
 
         protected override void LoadConfiguration()
         {
             try
             {
-                using (var r =
-                    new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigurationFile)))
+                using (var r = new StreamReader(ConfigurationFile))
                 {
                     var json = r.ReadToEnd();
                     _folderStructure = JsonConvert.DeserializeObject<List<Branch>>(json);
@@ -76,6 +68,11 @@ namespace BlinkLib
             }
         }
 
+        protected override void ExecuteTask()
+        {
+            CreateFolder();
+        }
+
         private void CreateFolder()
         {
             var currentPath = string.Empty;
@@ -84,7 +81,7 @@ namespace BlinkLib
             {
                 foreach (var currentBranch in _folderStructure)
                 {
-                    currentPath = Path.Combine(WorkingDirectory.Path, currentBranch.Name);
+                    currentPath = System.IO.Path.Combine(WorkingDirectory, currentBranch.Name);
 
                     Directory.CreateDirectory(currentPath);
 
@@ -94,7 +91,7 @@ namespace BlinkLib
             }
             catch (UnauthorizedAccessException)
             {
-                throw new BlinkException($"Directory \"{currentPath}\" is not currently accesible.");
+                throw new BlinkException($"Directory \"{currentPath}\" is not currently accessible.");
             }
             catch (PathTooLongException)
             {
@@ -119,17 +116,17 @@ namespace BlinkLib
             {
                 foreach (var currentBranch in node.Branches)
                 {
-                    currentPath = Path.Combine(WorkingDirectory.Path, rootPath, currentBranch.Name);
+                    currentPath = System.IO.Path.Combine(WorkingDirectory, rootPath, currentBranch.Name);
 
                     Directory.CreateDirectory(currentPath);
 
                     if (currentBranch.Branches != null)
-                        CreateFolder(currentBranch, Path.Combine(rootPath, currentBranch.Name));
+                        CreateFolder(currentBranch, System.IO.Path.Combine(rootPath, currentBranch.Name));
                 }
             }
             catch (UnauthorizedAccessException)
             {
-                throw new BlinkException($"Directory \"{currentPath}\" is not currently accesible.");
+                throw new BlinkException($"Directory \"{currentPath}\" is not currently accessible.");
             }
             catch (PathTooLongException)
             {
