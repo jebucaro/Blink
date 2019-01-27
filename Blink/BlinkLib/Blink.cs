@@ -22,7 +22,9 @@
  * 
  */
 
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace BlinkLib
@@ -32,17 +34,68 @@ namespace BlinkLib
 
         private const string DefaultConfigurationFile = "branch.settings.json";
 
+        protected List<Branch> _folderStructure;
+
+        /// <summary>
+        /// Gets or Sets the path to the configuration file used by all Blink subclasses
+        /// </summary>
         public string ConfigurationFile { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the base Directory used by all Blink subclasses
+        /// </summary>
         public DirectoryInfo WorkingDirectory { get; set; }
 
-        protected abstract void LoadConfiguration();
+        /// <summary>
+        /// Loads configuration file in a Blink subclass
+        /// </summary>
+        protected virtual void LoadConfiguration()
+        {
+            try
+            {
+                using (var r = new StreamReader(ConfigurationFile))
+                {
+                    var json = r.ReadToEnd();
+                    _folderStructure = JsonConvert.DeserializeObject<List<Branch>>(json);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                throw new BlinkException($"Unable to find configuration file: \"{ConfigurationFile}\".");
+            }
+            catch (DirectoryNotFoundException)
+            {
+                throw new BlinkException(
+                    $"Unable to access Blink application directory \"{AppDomain.CurrentDomain.BaseDirectory}\".");
+            }
+            catch (JsonException)
+            {
+                throw new BlinkException(
+                    $"There was an error while parsing configuration file: \"{ConfigurationFile}\".");
+            }
+            catch (FormatException ex)
+            {
+                throw new BlinkException(
+                    $"Invalid Directory name: \"{ex.Message}\", check your \"{ConfigurationFile}\" file.");
+            }
+        }
+
+        /// <summary>
+        /// Executes main task in a Blink subclass
+        /// </summary>
         protected abstract void ExecuteTask();
 
+        /// <summary>
+        /// Creates a new instance of Blink class
+        /// </summary>
         protected Blink()
         {
             ConfigurationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DefaultConfigurationFile);
         }
 
+        /// <summary>
+        /// Starts the process asociated with a Blink class
+        /// </summary>
         public void Execute()
         {
             if (WorkingDirectory is null)
@@ -58,7 +111,6 @@ namespace BlinkLib
                     throw new BlinkException($"Unable to create WorkingDirectory: { WorkingDirectory.FullName}");
                 }
                 
-
             LoadConfiguration();
 
             ExecuteTask();

@@ -30,19 +30,31 @@ namespace BlinkLib
 {
     public class CleanseStructure : Blink
     {
-
+        /// <summary>
+        /// Creates a new instance of CleanseStructure
+        /// </summary>
         public CleanseStructure() { }
 
+        /// <summary>
+        /// Loads the configuration file
+        /// </summary>
         protected override void LoadConfiguration()
         {
             // There is no configuration for this task :)
         }
 
+        /// <summary>
+        /// Cleanse empty folders
+        /// </summary>
         protected override void ExecuteTask()
         {
             CleanseFolder(WorkingDirectory.FullName);
         }
 
+        /// <summary>
+        /// Cleanse empty folders
+        /// </summary>
+        /// <param name="startLocation">Directory that is going to be cleansed</param>
         private void CleanseFolder(string startLocation)
         {
             var folder = startLocation;

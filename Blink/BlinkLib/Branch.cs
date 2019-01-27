@@ -31,7 +31,7 @@ using Newtonsoft.Json;
 
 namespace BlinkLib
 {
-    internal class Branch
+    public class Branch
     {
         private string _name;
 

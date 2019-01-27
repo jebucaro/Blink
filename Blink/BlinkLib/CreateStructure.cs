@@ -23,56 +23,30 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
 
 namespace BlinkLib
 {
     public class CreateStructure : Blink
     {
 
+        /// <summary>
+        /// Creates a new instance of CreateStructure
+        /// </summary>
         public CreateStructure() { }
 
-        private List<Branch> _folderStructure;
-
-        protected override void LoadConfiguration()
-        {
-            try
-            {
-                using (var r = new StreamReader(ConfigurationFile))
-                {
-                    var json = r.ReadToEnd();
-                    _folderStructure = JsonConvert.DeserializeObject<List<Branch>>(json);
-                }
-            }
-            catch (FileNotFoundException)
-            {
-                throw new BlinkException($"Unable to find configuration file: \"{ConfigurationFile}\".");
-            }
-            catch (DirectoryNotFoundException)
-            {
-                throw new BlinkException(
-                    $"Unable to access Blink application directory \"{AppDomain.CurrentDomain.BaseDirectory}\".");
-            }
-            catch (JsonException)
-            {
-                throw new BlinkException(
-                    $"There was an error while parsing configuration file: \"{ConfigurationFile}\".");
-            }
-            catch (FormatException ex)
-            {
-                throw new BlinkException(
-                    $"Invalid Directory name: \"{ex.Message}\", check your \"{ConfigurationFile}\" file.");
-            }
-        }
-
+        /// <summary>
+        /// Creates a folder structure based on configuration file
+        /// </summary>
         protected override void ExecuteTask()
         {
-            CreateFolder();
+            CreateFolders();
         }
 
-        private void CreateFolder()
+        /// <summary>
+        /// Creates a folder structure based on configuration file
+        /// </summary>
+        private void CreateFolders()
         {
             var currentPath = string.Empty;
 
@@ -85,7 +59,7 @@ namespace BlinkLib
                     Directory.CreateDirectory(currentPath);
 
                     if (currentBranch.Branches != null)
-                        CreateFolder(currentBranch, currentBranch.Name);
+                        CreateFolders(currentBranch, currentBranch.Name);
                 }
             }
             catch (UnauthorizedAccessException)
@@ -107,7 +81,12 @@ namespace BlinkLib
             }
         }
 
-        private void CreateFolder(Branch node, string rootPath)
+        /// <summary>
+        /// Creates a folder structure based on configuration file
+        /// </summary>
+        /// <param name="node">Current node</param>
+        /// <param name="rootPath">Parent Directory path</param>
+        private void CreateFolders(Branch node, string rootPath)
         {
             var currentPath = string.Empty;
 
@@ -120,7 +99,7 @@ namespace BlinkLib
                     Directory.CreateDirectory(currentPath);
 
                     if (currentBranch.Branches != null)
-                        CreateFolder(currentBranch, Path.Combine(rootPath, currentBranch.Name));
+                        CreateFolders(currentBranch, Path.Combine(rootPath, currentBranch.Name));
                 }
             }
             catch (UnauthorizedAccessException)
