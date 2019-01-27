@@ -30,6 +30,9 @@ namespace BlinkLib
 {
     public class CleanseStructure : Blink
     {
+
+        public CleanseStructure(DirectoryInfo directoryInfo) : base(directoryInfo) { }
+
         protected override void LoadConfiguration()
         {
             // There is no configuration for this task :)
@@ -37,12 +40,12 @@ namespace BlinkLib
 
         protected override void ExecuteTask()
         {
-            CleanseFolder(WorkingDirectory);
+            CleanseFolder(WorkingDirectory.FullName);
         }
 
         private void CleanseFolder(string startLocation)
         {
-            var folder = string.Empty;
+            var folder = startLocation;
 
             try
             {

@@ -31,11 +31,10 @@ namespace BlinkLib
 {
     public class CreateStructure : Blink
     {
-        
+
+        public CreateStructure(DirectoryInfo directoryInfo) : base(directoryInfo) { }
 
         private List<Branch> _folderStructure;
-
-        public CreateStructure(){}
 
         protected override void LoadConfiguration()
         {
@@ -81,7 +80,7 @@ namespace BlinkLib
             {
                 foreach (var currentBranch in _folderStructure)
                 {
-                    currentPath = System.IO.Path.Combine(WorkingDirectory, currentBranch.Name);
+                    currentPath = Path.Combine(WorkingDirectory.FullName, currentBranch.Name);
 
                     Directory.CreateDirectory(currentPath);
 
@@ -116,12 +115,12 @@ namespace BlinkLib
             {
                 foreach (var currentBranch in node.Branches)
                 {
-                    currentPath = System.IO.Path.Combine(WorkingDirectory, rootPath, currentBranch.Name);
+                    currentPath = Path.Combine(WorkingDirectory.FullName, rootPath, currentBranch.Name);
 
                     Directory.CreateDirectory(currentPath);
 
                     if (currentBranch.Branches != null)
-                        CreateFolder(currentBranch, System.IO.Path.Combine(rootPath, currentBranch.Name));
+                        CreateFolder(currentBranch, Path.Combine(rootPath, currentBranch.Name));
                 }
             }
             catch (UnauthorizedAccessException)

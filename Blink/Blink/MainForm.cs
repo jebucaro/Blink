@@ -26,6 +26,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -46,7 +47,7 @@ namespace Blink
         private const int NotificationDelay = 4500;
 
         private BlinkLib.Blink _blinkStrategy;
-        private WorkingDirectory _workingDirectory;
+        
         private readonly NotifyIcon _notification;
 
         private string[] _args;
@@ -139,20 +140,20 @@ namespace Blink
 
             bgWorker.ReportProgress(25);
 
-            _workingDirectory = new WorkingDirectory(_args[2]);
+            DirectoryInfo _workingDirectory = new DirectoryInfo(_args[2]);
 
             bgWorker.ReportProgress(50);
 
             switch (_args[1].ToLower())
             {
                 case CommandSpreadsheet:
-                    _blinkStrategy = new GenerateSpreadsheet();
+                    _blinkStrategy = new GenerateSpreadsheet(_workingDirectory);
                     break;
                 case CommandStructure:
-                    _blinkStrategy = new CreateStructure();
+                    _blinkStrategy = new CreateStructure(_workingDirectory);
                     break;
                 case CommandCleanse:
-                    _blinkStrategy = new CleanseStructure();
+                    _blinkStrategy = new CleanseStructure(_workingDirectory);
                     break;
                 default:
                     throw new InvalidOperationException(_args[1]);
@@ -160,8 +161,7 @@ namespace Blink
 
             bgWorker.ReportProgress(75);
 
-            _workingDirectory.SetBlinkStrategy(_blinkStrategy);
-            _workingDirectory.Execute();
+            _blinkStrategy.Execute();
 
             bgWorker.ReportProgress(TaskCompleted);
         }

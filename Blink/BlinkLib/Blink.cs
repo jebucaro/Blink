@@ -32,14 +32,16 @@ namespace BlinkLib
 
         private const string DefaultConfigurationFile = "branch.settings.json";
 
-        public string WorkingDirectory { get; set; }
+        protected DirectoryInfo WorkingDirectory;
         public string ConfigurationFile { get; set; }
 
         protected abstract void LoadConfiguration();
         protected abstract void ExecuteTask();
 
-        protected Blink()
+        protected Blink(DirectoryInfo directoryInfo)
         {
+            WorkingDirectory = directoryInfo;
+
             ConfigurationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DefaultConfigurationFile);
         }
 

@@ -39,11 +39,11 @@ namespace BlinkLib
 
         private List<Branch> _folderStructure;
         private HashSet<string> _listOfLabels;
-        private Dictionary<string, List<CustomFileInfo>> _map = new Dictionary<string, List<CustomFileInfo>>();
+        private Dictionary<string, List<FileInfo>> _map = new Dictionary<string, List<FileInfo>>();
 
         public string FileName { get; private set; }
 
-        public GenerateSpreadsheet(){}
+        public GenerateSpreadsheet(DirectoryInfo directoryInfo):base(directoryInfo) { }
 
         protected override void LoadConfiguration()
         {
@@ -78,10 +78,10 @@ namespace BlinkLib
 
         protected override void ExecuteTask()
         {
-            _map.Add(LabelAll, new List<CustomFileInfo>());
-
             BrowseFiles();
+
             GenerateListOfLabels();
+
             GenerateExcelFile();
         }
 
@@ -94,16 +94,16 @@ namespace BlinkLib
                 if (!tree.Browsable)
                     continue;
 
-                var currentPath = System.IO.Path.Combine(WorkingDirectory, tree.Name);
+                var currentPath = Path.Combine(WorkingDirectory.FullName, tree.Name);
 
                 if (!string.IsNullOrWhiteSpace(tree.Label))
                 {
                     var currentLabel = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(tree.Label);
-                    
-                    if (_listOfLabels.Add(currentLabel))
-                        _map.Add(currentLabel, new List<CustomFileInfo>());
 
-                    _map[currentLabel].AddRange(_map[LabelAll].FindAll(cfi => cfi.FullPath.Contains(currentPath)));
+                    if (_listOfLabels.Add(currentLabel))
+                        _map.Add(currentLabel, new List<FileInfo>());
+
+                    _map[currentLabel].AddRange(_map[LabelAll].FindAll(cfi => cfi.FullName.Contains(currentPath)));
 
                     continue;
                 }
@@ -122,16 +122,16 @@ namespace BlinkLib
                 if (!branch.Browsable)
                     continue;
 
-                var currentPath = System.IO.Path.Combine(parentPath, branch.Name);
+                var currentPath = Path.Combine(parentPath, branch.Name);
 
                 if (!string.IsNullOrWhiteSpace(branch.Label))
                 {
                     var currentLabel = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(branch.Label);
 
                     if (_listOfLabels.Add(currentLabel))
-                        _map.Add(currentLabel, new List<CustomFileInfo>());
+                        _map.Add(currentLabel, new List<FileInfo>());
 
-                    _map[currentLabel].AddRange(_map[LabelAll].FindAll(cfi => cfi.FullPath.Contains(currentPath)));
+                    _map[currentLabel].AddRange(_map[LabelAll].FindAll(cfi => cfi.FullName.Contains(currentPath)));
 
                     continue;
                 }
@@ -191,10 +191,11 @@ namespace BlinkLib
         private void BrowseFiles()
         {
             string[] files;
-
+            FileInfo[] files2;
             try
             {
-                files = Directory.GetFiles(WorkingDirectory, "*.*", SearchOption.AllDirectories);
+                files = Directory.GetFiles(WorkingDirectory.FullName, "*.*", SearchOption.AllDirectories);
+                files2 = WorkingDirectory.GetFiles("*.*", SearchOption.AllDirectories);
             }
             catch (UnauthorizedAccessException)
             {
@@ -216,8 +217,7 @@ namespace BlinkLib
             if (!files.Any())
                 throw new BlinkException($"\"{WorkingDirectory}\" is empty. Did you lost your files?");
 
-            foreach (string currentFile in files)
-                _map[LabelAll].Add(GetCustomFileInfo(currentFile, WorkingDirectory));
+            _map.Add(LabelAll, files2.ToList<FileInfo>());
         }
 
         private void GenerateExcelFile()
