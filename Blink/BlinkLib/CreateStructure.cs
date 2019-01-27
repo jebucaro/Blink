@@ -32,7 +32,7 @@ namespace BlinkLib
     public class CreateStructure : Blink
     {
 
-        public CreateStructure(DirectoryInfo directoryInfo) : base(directoryInfo) { }
+        public CreateStructure() { }
 
         private List<Branch> _folderStructure;
 

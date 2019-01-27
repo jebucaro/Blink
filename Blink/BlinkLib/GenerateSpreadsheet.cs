@@ -43,7 +43,7 @@ namespace BlinkLib
 
         public string FileName { get; private set; }
 
-        public GenerateSpreadsheet(DirectoryInfo directoryInfo):base(directoryInfo) { }
+        public GenerateSpreadsheet() { }
 
         protected override void LoadConfiguration()
         {
@@ -141,51 +141,6 @@ namespace BlinkLib
 
                 GenerateListOfLabels(branch.Branches, currentPath);
             }
-        }
-
-        private static CustomFileInfo GetCustomFileInfo(string filePath, string parentPath)
-        {
-            var result = new CustomFileInfo();
-
-            try
-            {
-                result.FileName = System.IO.Path.GetFileName(filePath);
-            }
-            catch (Exception)
-            {
-                result.FileName = string.Empty;
-            }
-
-            try
-            {
-                result.FileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(filePath);
-            }
-            catch (Exception)
-            {
-                result.FileNameWithoutExtension = string.Empty;
-            }
-
-            try
-            {
-                result.Extension = System.IO.Path.GetExtension(filePath)?.Substring(1);
-            }
-            catch (Exception)
-            {
-                result.Extension = string.Empty;
-            }
-
-            try
-            {
-                result.RelativePath = System.IO.Path.GetDirectoryName(filePath)?.Substring(parentPath.Length);
-            }
-            catch (Exception)
-            {
-                result.RelativePath = string.Empty;
-            }
-
-            result.FullPath = filePath;
-
-            return result;
         }
 
         private void BrowseFiles()

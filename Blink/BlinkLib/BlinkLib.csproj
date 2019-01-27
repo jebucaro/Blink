@@ -55,7 +55,6 @@
     <Compile Include="Branch.cs" />
     <Compile Include="CleanseStructure.cs" />
     <Compile Include="CreateStructure.cs" />
-    <Compile Include="CustomFileInfo.cs" />
     <Compile Include="GenerateSpreadsheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GenericSheet.cs" />

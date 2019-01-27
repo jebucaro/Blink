@@ -32,21 +32,33 @@ namespace BlinkLib
 
         private const string DefaultConfigurationFile = "branch.settings.json";
 
-        protected DirectoryInfo WorkingDirectory;
         public string ConfigurationFile { get; set; }
+        public DirectoryInfo WorkingDirectory { get; set; }
 
         protected abstract void LoadConfiguration();
         protected abstract void ExecuteTask();
 
-        protected Blink(DirectoryInfo directoryInfo)
+        protected Blink()
         {
-            WorkingDirectory = directoryInfo;
-
             ConfigurationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DefaultConfigurationFile);
         }
 
         public void Execute()
         {
+            if (WorkingDirectory is null)
+                throw new ArgumentNullException("WorkingDirectory");
+
+            if (!WorkingDirectory.Exists)
+                try
+                {
+                    WorkingDirectory.Create();
+                }
+                catch (Exception)
+                {
+                    throw new BlinkException($"Unable to create WorkingDirectory: { WorkingDirectory.FullName}");
+                }
+                
+
             LoadConfiguration();
 
             ExecuteTask();

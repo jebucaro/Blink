@@ -147,13 +147,13 @@ namespace Blink
             switch (_args[1].ToLower())
             {
                 case CommandSpreadsheet:
-                    _blinkStrategy = new GenerateSpreadsheet(_workingDirectory);
+                    _blinkStrategy = new GenerateSpreadsheet();
                     break;
                 case CommandStructure:
-                    _blinkStrategy = new CreateStructure(_workingDirectory);
+                    _blinkStrategy = new CreateStructure();
                     break;
                 case CommandCleanse:
-                    _blinkStrategy = new CleanseStructure(_workingDirectory);
+                    _blinkStrategy = new CleanseStructure();
                     break;
                 default:
                     throw new InvalidOperationException(_args[1]);
@@ -161,6 +161,7 @@ namespace Blink
 
             bgWorker.ReportProgress(75);
 
+            _blinkStrategy.WorkingDirectory = _workingDirectory;
             _blinkStrategy.Execute();
 
             bgWorker.ReportProgress(TaskCompleted);

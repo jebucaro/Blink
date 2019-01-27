@@ -31,7 +31,7 @@ namespace BlinkLib
     public class CleanseStructure : Blink
     {
 
-        public CleanseStructure(DirectoryInfo directoryInfo) : base(directoryInfo) { }
+        public CleanseStructure() { }
 
         protected override void LoadConfiguration()
         {
