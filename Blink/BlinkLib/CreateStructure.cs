@@ -23,78 +23,48 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
 
 namespace BlinkLib
 {
-    public class BuildStructureCommand : BlinkCommand
+    public class CreateStructure : Blink
     {
-        private const string ConfigurationFile = "branch.settings.json";
 
-        private List<Branch> _folderStructure;
+        /// <summary>
+        /// Creates a new instance of CreateStructure
+        /// </summary>
+        public CreateStructure() { }
 
-        public BuildStructureCommand(WorkingDirectory workingDirectory) : base(workingDirectory)
-        {
-        }
-
+        /// <summary>
+        /// Creates a folder structure based on configuration file
+        /// </summary>
         protected override void ExecuteTask()
         {
-            CreateFolder();
+            CreateFolders();
         }
 
-        protected override void LoadConfiguration()
-        {
-            try
-            {
-                using (var r =
-                    new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigurationFile)))
-                {
-                    var json = r.ReadToEnd();
-                    _folderStructure = JsonConvert.DeserializeObject<List<Branch>>(json);
-                }
-            }
-            catch (FileNotFoundException)
-            {
-                throw new BlinkException($"Unable to find configuration file: \"{ConfigurationFile}\".");
-            }
-            catch (DirectoryNotFoundException)
-            {
-                throw new BlinkException(
-                    $"Unable to access Blink application directory \"{AppDomain.CurrentDomain.BaseDirectory}\".");
-            }
-            catch (JsonException)
-            {
-                throw new BlinkException(
-                    $"There was an error while parsing configuration file: \"{ConfigurationFile}\".");
-            }
-            catch (FormatException ex)
-            {
-                throw new BlinkException(
-                    $"Invalid Directory name: \"{ex.Message}\", check your \"{ConfigurationFile}\" file.");
-            }
-        }
-
-        private void CreateFolder()
+        /// <summary>
+        /// Creates a folder structure based on configuration file
+        /// </summary>
+        private void CreateFolders()
         {
             var currentPath = string.Empty;
 
             try
             {
-                foreach (var currentBranch in _folderStructure)
+                foreach (var currentBranch in FolderStructure)
                 {
-                    currentPath = Path.Combine(WorkingDirectory.Path, currentBranch.Name);
+                    currentPath = Path.Combine(WorkingDirectory.FullName, currentBranch.Name);
 
                     Directory.CreateDirectory(currentPath);
 
                     if (currentBranch.Branches != null)
-                        CreateFolder(currentBranch, currentBranch.Name);
+                        CreateFolders(currentBranch, currentBranch.Name);
                 }
             }
             catch (UnauthorizedAccessException)
             {
-                throw new BlinkException($"Directory \"{currentPath}\" is not currently accesible.");
+                throw new BlinkException($"Directory \"{currentPath}\" is not currently accessible.");
             }
             catch (PathTooLongException)
             {
@@ -111,7 +81,12 @@ namespace BlinkLib
             }
         }
 
-        private void CreateFolder(Branch node, string rootPath)
+        /// <summary>
+        /// Creates a folder structure based on configuration file
+        /// </summary>
+        /// <param name="node">Current node</param>
+        /// <param name="rootPath">Parent Directory path</param>
+        private void CreateFolders(Branch node, string rootPath)
         {
             var currentPath = string.Empty;
 
@@ -119,17 +94,17 @@ namespace BlinkLib
             {
                 foreach (var currentBranch in node.Branches)
                 {
-                    currentPath = Path.Combine(WorkingDirectory.Path, rootPath, currentBranch.Name);
+                    currentPath = Path.Combine(WorkingDirectory.FullName, rootPath, currentBranch.Name);
 
                     Directory.CreateDirectory(currentPath);
 
                     if (currentBranch.Branches != null)
-                        CreateFolder(currentBranch, Path.Combine(rootPath, currentBranch.Name));
+                        CreateFolders(currentBranch, Path.Combine(rootPath, currentBranch.Name));
                 }
             }
             catch (UnauthorizedAccessException)
             {
-                throw new BlinkException($"Directory \"{currentPath}\" is not currently accesible.");
+                throw new BlinkException($"Directory \"{currentPath}\" is not currently accessible.");
             }
             catch (PathTooLongException)
             {

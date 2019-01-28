@@ -23,6 +23,7 @@
  */
 
 using System.Collections.Generic;
+using System.IO;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
@@ -46,8 +47,9 @@ namespace BlinkLib
 
         public string SheetName { get; set; }
         public ExcelPackage WorkingPackage { get; set; }
-        public List<CustomFileInfo> Content { get; set; }
+        public List<FileInfo> Content { get; set; }
         public long TableNumber { get; set; }
+        public string WorkingDirectory { get; set; }
 
         public void Generate()
         {
@@ -70,9 +72,9 @@ namespace BlinkLib
             foreach (var customFileInfo in Content)
             {
                 ws.Cells[currentRow, SheetColumnNumber].Value = currentRow - SheetInitialRow;
-                ws.Cells[currentRow, SheetColumnFullname].Value = customFileInfo.FileName;
+                ws.Cells[currentRow, SheetColumnFullname].Value = customFileInfo.Name;
                 ws.Cells[currentRow, SheetColumnExtension].Value = customFileInfo.Extension;
-                ws.Cells[currentRow, SheetColumnPath].Value = customFileInfo.RelativePath;
+                ws.Cells[currentRow, SheetColumnPath].Value = customFileInfo.FullName.Substring(WorkingDirectory.Length);
 
                 currentRow++;
             }

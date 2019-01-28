@@ -26,6 +26,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -37,19 +38,19 @@ namespace Blink
     {
         #region Declarations
 
-        const string CommandStructure = "-structure";
-        const string CommandCleanse = "-cleanse";
-        const string CommandSpreadsheet = "-spreadsheet";
+        private const string CommandStructure = "-structure";
+        private const string CommandCleanse = "-cleanse";
+        private const string CommandSpreadsheet = "-spreadsheet";
 
-        const int TaskCompleted = 100;
+        private const int TaskCompleted = 100;
 
-        const int NotificationDelay = 4500;
+        private const int NotificationDelay = 4500;
 
-        BlinkCommand _blinkCommand;
-        WorkingDirectory _workingDirectory;
-        readonly NotifyIcon notification;
+        private BlinkLib.Blink _blinkStrategy;
+        
+        private readonly NotifyIcon _notification;
 
-        string[] _args;
+        private string[] _args;
 
         #endregion
 
@@ -87,14 +88,14 @@ namespace Blink
 
             InitializeComponent();
 
-            notification = new NotifyIcon
+            _notification = new NotifyIcon
             {
                 Icon = new Icon(Icon, 16, 16),
                 BalloonTipIcon = ToolTipIcon.None
             };
 
-            notification.BalloonTipClosed += Notification_BalloonTipClosed;
-            notification.BalloonTipClicked += Notification_BalloonTipClicked;
+            _notification.BalloonTipClosed += Notification_BalloonTipClosed;
+            _notification.BalloonTipClicked += Notification_BalloonTipClicked;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -112,14 +113,14 @@ namespace Blink
 
         private void Notification_BalloonTipClicked(object sender, EventArgs e)
         {
-            notification?.Dispose();
+            _notification?.Dispose();
 
             Close();
         }
 
         private void Notification_BalloonTipClosed(object sender, EventArgs e)
         {
-            notification?.Dispose();
+            _notification?.Dispose();
 
             Close();
         }
@@ -139,20 +140,20 @@ namespace Blink
 
             bgWorker.ReportProgress(25);
 
-            _workingDirectory = new WorkingDirectory(_args[2]);
+            DirectoryInfo _workingDirectory = new DirectoryInfo(_args[2]);
 
             bgWorker.ReportProgress(50);
 
             switch (_args[1].ToLower())
             {
                 case CommandSpreadsheet:
-                    _blinkCommand = new GenerateSpreadsheetCommand(_workingDirectory);
+                    _blinkStrategy = new GenerateSpreadsheet();
                     break;
                 case CommandStructure:
-                    _blinkCommand = new BuildStructureCommand(_workingDirectory);
+                    _blinkStrategy = new CreateStructure();
                     break;
                 case CommandCleanse:
-                    _blinkCommand = new CleanseStructureCommand(_workingDirectory);
+                    _blinkStrategy = new CleanseStructure();
                     break;
                 default:
                     throw new InvalidOperationException(_args[1]);
@@ -160,7 +161,8 @@ namespace Blink
 
             bgWorker.ReportProgress(75);
 
-            _blinkCommand.Execute();
+            _blinkStrategy.WorkingDirectory = _workingDirectory;
+            _blinkStrategy.Execute();
 
             bgWorker.ReportProgress(TaskCompleted);
         }
@@ -168,16 +170,16 @@ namespace Blink
         private void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
-            notification.Visible = true;
+            _notification.Visible = true;
 
             if (e.Error is null)
             {
-                notification.ShowBalloonTip(NotificationDelay, "Blink", "Operation completed successfully", ToolTipIcon.Info);
+                _notification.ShowBalloonTip(NotificationDelay, "Blink", "Operation completed successfully", ToolTipIcon.Info);
                 TaskbarProgress.SetState(Handle, TaskbarProgress.TaskbarStates.Normal);
             }
             else
             {
-                notification.ShowBalloonTip(NotificationDelay, e.Error.Source, e.Error.Message , ToolTipIcon.Error);
+                _notification.ShowBalloonTip(NotificationDelay, e.Error.Source, e.Error.Message , ToolTipIcon.Error);
                 TaskbarProgress.SetState(Handle, TaskbarProgress.TaskbarStates.Error);
             }
                 
