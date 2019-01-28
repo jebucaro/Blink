@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Blink
+namespace BlinkClient
 {
     partial class MainForm
     {
@@ -128,7 +128,7 @@ namespace Blink
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Blink.Properties.Resources.if_Lightbulb_728950__1_;
+            this.pictureBox1.Image = global::BlinkClient.Properties.Resources.if_Lightbulb_728950__1_;
             this.pictureBox1.Location = new System.Drawing.Point(117, 36);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(128, 128);

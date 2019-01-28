@@ -25,8 +25,9 @@
 using System;
 using System.IO;
 using System.Linq;
+using BlinkLib;
 
-namespace BlinkLib
+namespace BlinkClient
 {
     public class CleanseStructure : Blink
     {
