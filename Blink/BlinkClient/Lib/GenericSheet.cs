@@ -27,7 +27,7 @@ using System.IO;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
-namespace BlinkLib
+namespace BlinkClient
 {
     internal class GenericSheet
     {

@@ -29,8 +29,10 @@ using System.Linq;
 using System.Globalization;
 using OfficeOpenXml;
 using System.Diagnostics;
+using BlinkLib;
 
-namespace BlinkLib
+
+namespace BlinkClient
 {
     public class GenerateSpreadsheet : Blink
     {

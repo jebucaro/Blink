@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=4.5.3.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.5.3\lib\net40\EPPlus.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -44,16 +41,9 @@
     <Compile Include="BlinkException.cs" />
     <Compile Include="Blink.cs" />
     <Compile Include="Branch.cs" />
-    <Compile Include="CleanseStructure.cs" />
-    <Compile Include="CreateStructure.cs" />
-    <Compile Include="GenerateSpreadsheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GenericSheet.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="branch.settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

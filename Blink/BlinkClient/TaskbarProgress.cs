@@ -3,7 +3,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Blink
+namespace BlinkClient
 {
     public static class TaskbarProgress
     {

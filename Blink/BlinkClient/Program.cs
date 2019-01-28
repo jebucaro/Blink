@@ -25,7 +25,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Blink
+namespace BlinkClient
 {
     class Program
     {

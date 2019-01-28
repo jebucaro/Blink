@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkLib", "BlinkLib\BlinkLib.csproj", "{8F493D39-4BBC-4E1C-A664-8FDDED2E79D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink", "Blink\Blink.csproj", "{E0D6A5B1-053F-46A4-B798-117C18FDE7B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkClient", "BlinkClient\BlinkClient.csproj", "{E0D6A5B1-053F-46A4-B798-117C18FDE7B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

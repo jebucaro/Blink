@@ -32,7 +32,7 @@ using System.Threading;
 using System.Windows.Forms;
 using BlinkLib;
 
-namespace Blink
+namespace BlinkClient
 {
     public partial class MainForm : Form
     {
