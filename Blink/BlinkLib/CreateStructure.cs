@@ -52,7 +52,7 @@ namespace BlinkLib
 
             try
             {
-                foreach (var currentBranch in _folderStructure)
+                foreach (var currentBranch in FolderStructure)
                 {
                     currentPath = Path.Combine(WorkingDirectory.FullName, currentBranch.Name);
 

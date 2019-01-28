@@ -34,7 +34,7 @@ namespace BlinkLib
 
         private const string DefaultConfigurationFile = "branch.settings.json";
 
-        protected List<Branch> _folderStructure;
+        protected List<Branch> FolderStructure;
 
         /// <summary>
         /// Gets or Sets the path to the configuration file used by all Blink subclasses
@@ -56,7 +56,7 @@ namespace BlinkLib
                 using (var r = new StreamReader(ConfigurationFile))
                 {
                     var json = r.ReadToEnd();
-                    _folderStructure = JsonConvert.DeserializeObject<List<Branch>>(json);
+                    FolderStructure = JsonConvert.DeserializeObject<List<Branch>>(json);
                 }
             }
             catch (FileNotFoundException)
@@ -94,12 +94,12 @@ namespace BlinkLib
         }
 
         /// <summary>
-        /// Starts the process asociated with a Blink class
+        /// Starts the process associated with a Blink class
         /// </summary>
         public void Execute()
         {
             if (WorkingDirectory is null)
-                throw new ArgumentNullException("WorkingDirectory");
+                throw new ArgumentNullException();
 
             if (!WorkingDirectory.Exists)
                 try

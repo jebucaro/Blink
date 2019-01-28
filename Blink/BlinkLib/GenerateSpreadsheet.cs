@@ -68,7 +68,7 @@ namespace BlinkLib
         {
             _listOfLabels = new HashSet<string>();
 
-            foreach (var tree in _folderStructure)
+            foreach (var tree in FolderStructure)
             {
                 if (!tree.Browsable)
                     continue;
@@ -159,7 +159,7 @@ namespace BlinkLib
             if (!files.Any())
                 throw new BlinkException($"\"{WorkingDirectory}\" is empty. Did you lost your files?");
 
-            _map.Add(LabelAll, files2.ToList<FileInfo>());
+            _map.Add(LabelAll, files2.ToList());
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace BlinkLib
                     WorkingPackage = pck,
                     SheetName = entry.Key,
                     Content = entry.Value,
-                    WorkingDirectory = this.WorkingDirectory.FullName,
+                    WorkingDirectory = WorkingDirectory.FullName,
                     TableNumber = ++tableNumber
                 };
 
@@ -209,7 +209,7 @@ namespace BlinkLib
         }
 
         /// <summary>
-        /// Generates a randon file name inside TempPath
+        /// Generates a random file name inside TempPath
         /// </summary>
         /// <param name="extension">Extension for temporary file</param>
         /// <returns>Full path to temporary file</returns>

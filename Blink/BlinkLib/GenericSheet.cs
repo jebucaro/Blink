@@ -74,7 +74,7 @@ namespace BlinkLib
                 ws.Cells[currentRow, SheetColumnNumber].Value = currentRow - SheetInitialRow;
                 ws.Cells[currentRow, SheetColumnFullname].Value = customFileInfo.Name;
                 ws.Cells[currentRow, SheetColumnExtension].Value = customFileInfo.Extension;
-                ws.Cells[currentRow, SheetColumnPath].Value = customFileInfo.FullName?.Substring(WorkingDirectory.Length);
+                ws.Cells[currentRow, SheetColumnPath].Value = customFileInfo.FullName.Substring(WorkingDirectory.Length);
 
                 currentRow++;
             }

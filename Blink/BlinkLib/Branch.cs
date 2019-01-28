@@ -51,12 +51,14 @@ namespace BlinkLib
             }
         }
 
-        [JsonProperty("label")] public string Label { get; set; }
+        [JsonProperty("label")]
+        public string Label { get; set; }
 
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool Browsable { get; set; }
 
-        [JsonProperty("branch")] public List<Branch> Branches { get; set; }
+        [JsonProperty("branch")]
+        public List<Branch> Branches { get; set; }
     }
 }
