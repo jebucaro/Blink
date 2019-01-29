@@ -33,15 +33,15 @@ LicenseFile             =Resources\mit_license.txt
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "..\Blink\BlinkClient\bin\Release\BlinkClient.exe";            DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Blink\BlinkClient\bin\Release\EPPlus.dll";                 DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Blink\BlinkClient\bin\Release\Newtonsoft.Json.dll";        DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Blink\BlinkClient\bin\Release\branch.settings.json";       DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Blink\BlinkClient\bin\Release\BlinkLib.dll";               DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "Resources\folder.ico";                                        DestDir: "{userappdata}\Blink"; Flags: ignoreversion
-Source: "Resources\spreadsheet.ico";                                   DestDir: "{userappdata}\Blink"; Flags: ignoreversion
-Source: "Resources\lightbulb.ico";                                     DestDir: "{userappdata}\Blink"; Flags: ignoreversion
-Source: "Resources\delete.ico";                                        DestDir: "{userappdata}\Blink"; Flags: ignoreversion
+Source: "..\Source\BlinkClient\bin\Release\BlinkClient.exe";            DestDir: "{userappdata}\Blink"; Flags: replacesameversion
+Source: "..\Source\BlinkClient\bin\Release\EPPlus.dll";                 DestDir: "{userappdata}\Blink"; Flags: replacesameversion
+Source: "..\Source\BlinkClient\bin\Release\Newtonsoft.Json.dll";        DestDir: "{userappdata}\Blink"; Flags: replacesameversion
+Source: "..\Source\BlinkClient\bin\Release\branch.settings.json";       DestDir: "{userappdata}\Blink"; Flags: replacesameversion
+Source: "..\Source\BlinkClient\bin\Release\BlinkLib.dll";               DestDir: "{userappdata}\Blink"; Flags: replacesameversion
+Source: "Resources\folder.ico";                                         DestDir: "{userappdata}\Blink"; Flags: ignoreversion
+Source: "Resources\spreadsheet.ico";                                    DestDir: "{userappdata}\Blink"; Flags: ignoreversion
+Source: "Resources\lightbulb.ico";                                      DestDir: "{userappdata}\Blink"; Flags: ignoreversion
+Source: "Resources\delete.ico";                                         DestDir: "{userappdata}\Blink"; Flags: ignoreversion
 
 [Icons] 
 Name: "{group}\Blink"; Filename: "{userappdata}\Blink\BlinkClient.exe"
