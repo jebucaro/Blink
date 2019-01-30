@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define ApplicationName 'Blink'
-#define ApplicationVersion GetFileVersion('..\Blink\BlinkClient\bin\Release\BlinkClient.exe')
+#define ApplicationVersion GetFileVersion('..\Source\BlinkClient\bin\Release\BlinkClient.exe')
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -24,7 +24,7 @@ OutputBaseFilename      =Blink Setup
 PrivilegesRequired      =lowest
 SetupIconFile           =Resources\lightbulb.ico
 SolidCompression        =yes
-UninstallDisplayIcon    ={userappdata}\Blink\Blink.exe
+UninstallDisplayIcon    ={userappdata}\Blink\BlinkClient.exe
 VersionInfoVersion      ={#ApplicationVersion}
 WizardImageFile         =Resources\settings.bmp
 LicenseFile             =Resources\mit_license.txt
