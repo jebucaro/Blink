@@ -59,10 +59,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lib\CleanseStructure.cs" />
-    <Compile Include="Lib\CreateStructure.cs" />
-    <Compile Include="Lib\GenerateSpreadsheet.cs" />
-    <Compile Include="Lib\GenericSheet.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,9 +75,6 @@
     <Compile Include="TaskbarProgress.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=4.5.3.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.5.3\lib\net40\EPPlus.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -108,12 +101,15 @@
       <Project>{8f493d39-4bbc-4e1c-a664-8fdded2e79d9}</Project>
       <Name>BlinkLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlinkUtils\BlinkUtils.csproj">
+      <Project>{6cdc0f2b-2eed-4eae-b93f-92d2aa43611b}</Project>
+      <Name>BlinkUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="branch.settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
     <None Include="Resources\if_Lightbulb_728950 %281%29.png" />
   </ItemGroup>
   <ItemGroup>

@@ -32,11 +32,13 @@ using System.Diagnostics;
 using BlinkLib;
 
 
-namespace BlinkClient
+namespace BlinkUtils
 {
     public class GenerateSpreadsheet : Blink
     {
         private const string LabelAll = "(All)";
+
+        private ContentSheet ContentSheet;
 
         private HashSet<string> _listOfLabels;
         private Dictionary<string, List<FileInfo>> _map = new Dictionary<string, List<FileInfo>>();
@@ -47,9 +49,20 @@ namespace BlinkClient
         public string FileName { get; private set; }
 
         /// <summary>
-        /// Creates a new instance of GenerateSpreadsheet
+        /// Creates a new instance of GenerateSpreadsheet using a GenericContentSheet
         /// </summary>
-        public GenerateSpreadsheet() { }
+        public GenerateSpreadsheet()
+        {
+            ContentSheet = new GenericContentSheet();
+        }
+
+        /// <summary>
+        /// Creates a new instance of GenerateSpreadsheet using a custom ContentSheet
+        /// </summary>
+        public GenerateSpreadsheet(ContentSheet contentSheet)
+        {
+            ContentSheet = contentSheet;
+        }
 
         /// <summary>
         /// Creates a new spreadsheet file based on WorkingDirectory and configuration file
@@ -181,18 +194,16 @@ namespace BlinkClient
                 if (!entry.Value.Any())
                     continue;
 
-                var sheet = new GenericSheet
-                {
-                    WorkingPackage = pck,
-                    SheetName = entry.Key,
-                    Content = entry.Value,
-                    WorkingDirectory = WorkingDirectory.FullName,
-                    TableNumber = ++tableNumber
-                };
+                ContentSheet.SheetName = entry.Key;
+                ContentSheet.Content = entry.Value;
+                ContentSheet.BaseFolder = WorkingDirectory.FullName;
+                ContentSheet.ShowGridLines = false;
+                ContentSheet.AutoFitColumns = true;
+                ContentSheet.TableCorrelative = ++tableNumber;
 
                 try
                 {
-                    sheet.Generate();
+                    ContentSheet.Generate(pck);
                 }
                 catch (Exception ex)
                 {

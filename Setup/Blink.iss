@@ -38,6 +38,8 @@ Source: "..\Source\BlinkClient\bin\Release\EPPlus.dll";                 DestDir:
 Source: "..\Source\BlinkClient\bin\Release\Newtonsoft.Json.dll";        DestDir: "{userappdata}\Blink"; Flags: replacesameversion
 Source: "..\Source\BlinkClient\bin\Release\branch.settings.json";       DestDir: "{userappdata}\Blink"; Flags: replacesameversion
 Source: "..\Source\BlinkClient\bin\Release\BlinkLib.dll";               DestDir: "{userappdata}\Blink"; Flags: replacesameversion
+Source: "..\Source\BlinkClient\bin\Release\BlinkUtils.dll";             DestDir: "{userappdata}\Blink"; Flags: replacesameversion
+
 Source: "Resources\folder.ico";                                         DestDir: "{userappdata}\Blink"; Flags: ignoreversion
 Source: "Resources\spreadsheet.ico";                                    DestDir: "{userappdata}\Blink"; Flags: ignoreversion
 Source: "Resources\lightbulb.ico";                                      DestDir: "{userappdata}\Blink"; Flags: ignoreversion
