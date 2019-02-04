@@ -60,8 +60,7 @@ El proyecto esta sujeto a muchas mejoras, así­ que *sugerencias y modificaciones
 ## Mejoras en funcionalidad que me gustaría realizar
 + Agregar otra opción para modificar el archivo de configuración en el menú contextual.
 + Agregar más pantallas en el instalador que demuestren la utilidad de la aplicación
-+ Detectar la configuración del sistema operativo y dependiendo, ofrecer como mínimo la verisón en español (castellano) o la versión de inglés como mínimo.
-+ Agregar un mejor manejo de errores, considero que no debería tener tantos try catch al utilizar las clases de Blink_Lib, tal vez agregarle una clase que guarde el código de error y mensaje, ya que de esa manera aprovecho la funcionalidad del estado de la operación.
++ Detectar la configuración del sistema operativo y dependiendo, ofrecer como mínimo la versión en español (castellano) o la versión de inglés como mínimo.
 
 <hr>
 

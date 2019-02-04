@@ -44,14 +44,12 @@ Source: "Resources\folder.ico";                                         DestDir:
 Source: "Resources\spreadsheet.ico";                                    DestDir: "{userappdata}\Blink"; Flags: ignoreversion
 Source: "Resources\lightbulb.ico";                                      DestDir: "{userappdata}\Blink"; Flags: ignoreversion
 Source: "Resources\delete.ico";                                         DestDir: "{userappdata}\Blink"; Flags: ignoreversion
+Source: "Resources\edit.ico";                                           DestDir: "{userappdata}\Blink"; Flags: ignoreversion
 
 [Icons] 
 Name: "{group}\Blink"; Filename: "{userappdata}\Blink\BlinkClient.exe"
 
 [Registry]
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\BlinkFolder";                                                                 ValueData: "Blink folder structure";                                      Flags: deletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\BlinkSpreadsheet";                                                            ValueData: "Blink spreadsheet file";                                      Flags: deletekey
-
 Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink";                    ValueType: expandsz; ValueName: "MUIVerb";                                                                                   Flags: uninsdeletekey
 Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink";                    ValueType: expandsz; ValueName: "SubCommands";                                                                               Flags: uninsdeletekey
 Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink";                    ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\lightbulb.ico""";                       Flags: uninsdeletekey
@@ -73,6 +71,13 @@ Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";      
 Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\delete.ico""";                          Flags: uninsdeletekey
 Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Cleanse empty folders";                                       Flags: uninsdeletekey
 Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3\command"; ValueType: string ;                                ValueData: """{userappdata}\Blink\BlinkClient.exe"" -cleanse ""%1""";     Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: dword  ;  ValueName: "commandflags";    ValueData: "$00000040";                                                   Flags: uninsdeletekey
+
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: dword;    ValueName: "AttributeMask";   ValueData: "$1";                                                          Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: dword;    ValueName: "AttributeValue";  ValueData: "$1";                                                          Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\edit.ico""";                            Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Open configuration file";                                     Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4\command"; ValueType: string ;                                ValueData: """notepad.exe"" ""{userappdata}\Blink\branch.settings.json""";                                      Flags: uninsdeletekey
 
 [Code]
 
