@@ -26,7 +26,7 @@ using System;
 using System.IO;
 using BlinkLib;
 
-namespace BlinkClient
+namespace BlinkUtils
 {
     public class CreateStructure : Blink
     {

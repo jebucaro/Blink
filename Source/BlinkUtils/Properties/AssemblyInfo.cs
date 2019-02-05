@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("BlinkLib")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("BlinkUtils")]
+[assembly: AssemblyDescription("Jonathan Búcaro")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Jonathan Búcaro")]
-[assembly: AssemblyProduct("BlinkLib")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("BlinkUtils")]
+[assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
-[assembly: Guid("8f493d39-4bbc-4e1c-a664-8fdded2e79d9")]
+[assembly: Guid("6cdc0f2b-2eed-4eae-b93f-92d2aa43611b")]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //
@@ -31,5 +32,5 @@ using System.Runtime.InteropServices;
 // Puede especificar todos los valores o usar los números de compilación y de revisión predeterminados
 // mediante el carácter "*", como se muestra a continuación:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

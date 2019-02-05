@@ -1,14 +1,15 @@
 # Blink
 ![Blink Logo](./logo.jpg)
 
-Blink es una aplicación de Windows que puede realizar por el momento tres actividades, estas actividades son accesibles al abrir el menú contextual sobre una carpeta:
+Blink es una aplicación de Windows que puede realizar por el momento tres actividades principales, estas actividades son accesibles al abrir el menú contextual sobre una carpeta:
 
-+ Generar una estructura de carpetas de acuerdo a un archivo de configuración
-+ Listar el contenido de una carpeta en un archivo Excel. Dentro del archivo Excel se pueden listar los archivos en diferentes hojas, esto dependiendo de la configuración y la carpeta en la que estos actualmente se encuentren.
++ Generar una estructura de carpetas de acuerdo a lo definido en un archivo de configuración
++ Listar el contenido (archivos) de una carpeta en un archivo Excel. Dentro del archivo Excel se pueden listar los archivos en diferentes hojas, dependiendo de etiqueta asociada a la carpeta en el archivo de configuración.
 + Eliminar los directorios hijos que se encuentren actualmente vacíos.
 
+Se agregó una opción para abrir el archivo de configuración desde el menú contextual.
 
-Por ejemplo, el siguiente archivo de configuración:
+El siguiente ejemplo de archivo de configuración:
 
 ```json
 [
@@ -49,19 +50,20 @@ Por ejemplo, el siguiente archivo de configuración:
     }
 ]
 ```
-Creará la siguente estructura de carpetas dento de la carpeta seleccionada, en este caso la carpeta raíz *Ejemplo*:
+Creará la siguente estructura de carpetas dento de la carpeta seleccionada como carpeta de trabajo, en este caso la carpeta raíz *Ejemplo*:
 
 ![Ejemplo](./ejemplo.jpg)
 
-El proyecto se encuentra desarrollado en C# y el instalador fue realizado con Inno Setup. Se colocaron los permisos mínimos como para poder realizar la instalación sin privilegios de usuario administrador, y únicamente se instala para el usuario actual. El directorio de instalación es %appdata%\Blink.
-
-El proyecto esta sujeto a muchas mejoras, así­ que *sugerencias y modificaciones son bienvenidas!*
+El proyecto se encuentra desarrollado en C# y el instalador fue realizado con Inno Setup. Se colocaron los permisos mínimos como para poder realizar la instalación sin privilegios de usuario administrador, y únicamente se instala para el usuario actual. El directorio de instalación es __%appdata%\Blink__.
 
 ## Mejoras en funcionalidad que me gustaría realizar
-+ Agregar otra opción para modificar el archivo de configuración en el menú contextual.
+El proyecto esta sujeto a muchas mejoras, así­ que *sugerencias y modificaciones son bienvenidas!*
+
+Estas son algunas de las mejoras que me gustaría realizar.
+
++ ~~Agregar otra opción para modificar el archivo de configuración en el menú contextual.~~
 + Agregar más pantallas en el instalador que demuestren la utilidad de la aplicación
-+ Detectar la configuración del sistema operativo y dependiendo, ofrecer como mínimo la verisón en español (castellano) o la versión de inglés como mínimo.
-+ Agregar un mejor manejo de errores, considero que no debería tener tantos try catch al utilizar las clases de Blink_Lib, tal vez agregarle una clase que guarde el código de error y mensaje, ya que de esa manera aprovecho la funcionalidad del estado de la operación.
++ Detectar la configuración del sistema operativo y dependiendo, ofrecer como mínimo la versión en español (castellano) o la versión de inglés como mínimo.
 
 <hr>
 
@@ -70,3 +72,10 @@ El proyecto esta sujeto a muchas mejoras, así­ que *sugerencias y modificaciones
 + Newtonsoft JSON
 + EPPlus
 + Inno Setup
+
+<hr>
+
+## Iconos utilizados
++ [Recepkutuk](https://www.iconfinder.com/recepkutuk)
++ [Igorverizub](https://www.iconfinder.com/igorverizub)
++ [Glyphlab](https://www.iconfinder.com/glyphlab)
