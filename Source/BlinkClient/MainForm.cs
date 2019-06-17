@@ -106,7 +106,10 @@ namespace BlinkClient
         private void MainForm_Shown(object sender, EventArgs e)
         {
             if (_args.Count() == 1)
+            {
                 WindowState = FormWindowState.Normal;
+                StartPosition = FormStartPosition.CenterScreen;
+            }
             else
                 bgWorker.RunWorkerAsync();
         }

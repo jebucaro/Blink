@@ -35,8 +35,6 @@ namespace BlinkUtils
 {
     public abstract class ContentSheet
     {
-
-
         public bool AutoFitColumns { get; set; }
         public string SheetName { get; set; }
         public bool ShowGridLines { get; set; }

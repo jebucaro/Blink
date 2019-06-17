@@ -28,7 +28,7 @@ using BlinkLib;
 
 namespace BlinkUtils
 {
-    public class CreateStructure : Blink
+    public sealed class CreateStructure : Blink
     {
 
         /// <summary>

@@ -29,12 +29,12 @@ using BlinkLib;
 
 namespace BlinkClient
 {
-    public class CleanseStructure : Blink
+    public sealed class CleanseStructure : Blink
     {
         /// <summary>
         /// Creates a new instance of CleanseStructure
         /// </summary>
-        public CleanseStructure() { }
+        public CleanseStructure(){ }
 
         /// <summary>
         /// Loads the configuration file
