@@ -99,17 +99,12 @@ namespace BlinkLib
         public void Execute()
         {
             if (WorkingDirectory is null)
-                throw new ArgumentNullException();
+                throw new BlinkException(
+                    $"Working Directory is not assigned.");
 
             if (!WorkingDirectory.Exists)
-                try
-                {
-                    WorkingDirectory.Create();
-                }
-                catch (Exception)
-                {
-                    throw new BlinkException($"Unable to create WorkingDirectory: { WorkingDirectory.FullName}");
-                }
+                throw new BlinkException(
+                    $"Working Directory does not exists \"{WorkingDirectory.FullName}\".");
                 
             LoadConfiguration();
 

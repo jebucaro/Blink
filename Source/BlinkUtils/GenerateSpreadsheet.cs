@@ -34,7 +34,7 @@ using BlinkLib;
 
 namespace BlinkUtils
 {
-    public class GenerateSpreadsheet : Blink
+    public sealed class GenerateSpreadsheet : Blink
     {
         private const string LabelAll = "(All)";
 
@@ -48,12 +48,17 @@ namespace BlinkUtils
         /// </summary>
         public string FileName { get; private set; }
 
+        private void Initialize(ContentSheet contentSheet)
+        {
+            ContentSheet = contentSheet;
+        }
+
         /// <summary>
         /// Creates a new instance of GenerateSpreadsheet using a GenericContentSheet
         /// </summary>
         public GenerateSpreadsheet()
         {
-            ContentSheet = new GenericContentSheet();
+            Initialize(new GenericContentSheet());
         }
 
         /// <summary>
@@ -61,7 +66,7 @@ namespace BlinkUtils
         /// </summary>
         public GenerateSpreadsheet(ContentSheet contentSheet)
         {
-            ContentSheet = contentSheet;
+            Initialize(contentSheet);
         }
 
         /// <summary>
@@ -147,12 +152,16 @@ namespace BlinkUtils
         /// </summary>
         private void BrowseFiles()
         {
-            string[] files;
-            FileInfo[] files2;
+            FileInfo[] files;
+            FileInfo[] filtered;
+
             try
             {
-                files = Directory.GetFiles(WorkingDirectory.FullName, "*.*", SearchOption.AllDirectories);
-                files2 = WorkingDirectory.GetFiles("*.*", SearchOption.AllDirectories);
+                files = WorkingDirectory.GetFiles("*.*", SearchOption.AllDirectories);
+
+                // Don't show hidden files
+                filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden)).ToArray();
+
             }
             catch (UnauthorizedAccessException)
             {
@@ -171,10 +180,10 @@ namespace BlinkUtils
                 throw new BlinkException($"There is a Directory or File inside \"{WorkingDirectory}\" that is not currently accessible.");
             }
 
-            if (!files.Any())
+            if (!filtered.Any())
                 throw new BlinkException($"\"{WorkingDirectory}\" is empty. Did you lost your files?");
 
-            _map.Add(LabelAll, files2.ToList());
+            _map.Add(LabelAll, filtered.ToList());
         }
 
         /// <summary>
