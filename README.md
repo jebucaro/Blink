@@ -1,28 +1,30 @@
 # Blink
 ![Blink Logo](./logo.jpg)
 
-Blink es una aplicación de Windows que puede realizar por el momento tres actividades principales, estas actividades son accesibles al abrir el menú contextual sobre una carpeta:
+[![Build Status](https://jonathanbucaro.visualstudio.com/Blink/_apis/build/status/jebucaro.Blink?branchName=Dev)](https://jonathanbucaro.visualstudio.com/Blink/_build/latest?definitionId=8&branchName=Dev)
 
-+ Generar una estructura de carpetas de acuerdo a lo definido en un archivo de configuración
-+ Listar el contenido (archivos) de una carpeta en un archivo Excel. Dentro del archivo Excel se pueden listar los archivos en diferentes hojas, dependiendo de etiqueta asociada a la carpeta en el archivo de configuración.
-+ Eliminar los directorios hijos que se encuentren actualmente vacíos.
+Blink es una aplicaciÃ³n de Windows que puede realizar por el momento tres actividades principales, estas actividades son accesibles al abrir el menÃº contextual sobre una carpeta:
 
-Se agregó una opción para abrir el archivo de configuración desde el menú contextual.
++ Generar una estructura de carpetas de acuerdo a lo definido en un archivo de configuraciÃ³n
++ Listar el contenido (archivos) de una carpeta en un archivo Excel. Dentro del archivo Excel se pueden listar los archivos en diferentes hojas, dependiendo de etiqueta asociada a la carpeta en el archivo de configuraciÃ³n.
++ Eliminar los directorios hijos que se encuentren actualmente vacÃ­os.
 
-El siguiente ejemplo de archivo de configuración:
+Se agregÃ³ una opciÃ³n para abrir el archivo de configuraciÃ³n desde el menÃº contextual.
+
+El siguiente ejemplo de archivo de configuraciÃ³n:
 
 ```json
 [
     {
-        "name": "Código Fuente",
+        "name": "CÃ³digo Fuente",
         "branch": [
             {
-                "name": "Presentación",
-                "label": "Capa - Presentación"
+                "name": "PresentaciÃ³n",
+                "label": "Capa - PresentaciÃ³n"
             },
             {
-                "name": "Aplicación",
-                "label": "Capa - Aplicación"
+                "name": "AplicaciÃ³n",
+                "label": "Capa - AplicaciÃ³n"
             },
             {
                 "name": "Datos",
@@ -31,7 +33,7 @@ El siguiente ejemplo de archivo de configuración:
         ]
     },
     {
-        "name": "Documentación",
+        "name": "DocumentaciÃ³n",
         "browsable": false,
         "branch": [
             {
@@ -44,30 +46,30 @@ El siguiente ejemplo de archivo de configuración:
                 "name": "Manuales"
             },
             {
-                "name": "Documentación Técnica"
+                "name": "DocumentaciÃ³n TÃ©cnica"
             }
         ]
     }
 ]
 ```
-Creará la siguente estructura de carpetas dento de la carpeta seleccionada como carpeta de trabajo, en este caso la carpeta raíz *Ejemplo*:
+CrearÃ¡ la siguente estructura de carpetas dento de la carpeta seleccionada como carpeta de trabajo, en este caso la carpeta raÃ­z *Ejemplo*:
 
 ![Ejemplo](./ejemplo.jpg)
 
-El proyecto se encuentra desarrollado en C# y el instalador fue realizado con Inno Setup. Se colocaron los permisos mínimos como para poder realizar la instalación sin privilegios de usuario administrador, y únicamente se instala para el usuario actual. El directorio de instalación es __%appdata%\Blink__.
+El proyecto se encuentra desarrollado en C# y el instalador fue realizado con Inno Setup. Se colocaron los permisos mÃ­nimos como para poder realizar la instalaciÃ³n sin privilegios de usuario administrador, y Ãºnicamente se instala para el usuario actual. El directorio de instalaciÃ³n es __%appdata%\Blink__.
 
-## Mejoras en funcionalidad que me gustaría realizar
-El proyecto esta sujeto a muchas mejoras, así­ que *sugerencias y modificaciones son bienvenidas!*
+## Mejoras en funcionalidad que me gustarÃ­a realizar
+El proyecto esta sujeto a muchas mejoras, asÃ­Â­ que *sugerencias y modificaciones son bienvenidas!*
 
-Estas son algunas de las mejoras que me gustaría realizar.
+Estas son algunas de las mejoras que me gustarÃ­a realizar.
 
-+ ~~Agregar otra opción para modificar el archivo de configuración en el menú contextual.~~
-+ Agregar más pantallas en el instalador que demuestren la utilidad de la aplicación
-+ Detectar la configuración del sistema operativo y dependiendo, ofrecer como mínimo la versión en español (castellano) o la versión de inglés como mínimo.
++ ~~Agregar otra opciÃ³n para modificar el archivo de configuraciÃ³n en el menÃº contextual.~~
++ Agregar mÃ¡s pantallas en el instalador que demuestren la utilidad de la aplicaciÃ³n
++ Detectar la configuraciÃ³n del sistema operativo y dependiendo, ofrecer como mÃ­nimo la versiÃ³n en espaÃ±ol (castellano) o la versiÃ³n de inglÃ©s como mÃ­nimo.
 
 <hr>
 
-## Construído con
+## ConstruÃ­do con
 + C#
 + Newtonsoft JSON
 + EPPlus
