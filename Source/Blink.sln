@@ -1,13 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkLib", "BlinkLib\BlinkLib.csproj", "{8F493D39-4BBC-4E1C-A664-8FDDED2E79D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin", "Blink.Plugin\Blink.Plugin.csproj", "{8F493D39-4BBC-4E1C-A664-8FDDED2E79D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkClient", "BlinkClient\BlinkClient.csproj", "{E0D6A5B1-053F-46A4-B798-117C18FDE7B3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{9260CA29-C392-435E-9132-2A5006251AA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkUtils", "BlinkUtils\BlinkUtils.csproj", "{6CDC0F2B-2EED-4EAE-B93F-92D2AA43611B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Core", "Blink.Core\Blink.Core.csproj", "{F737502A-A489-42E5-80FC-4DD451E1B514}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.CommonConfiguration", "Plugins\Blink.Plugin.CommonConfiguration\Blink.Plugin.CommonConfiguration.csproj", "{79469D0F-5050-4395-9E35-43B95704A245}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.CreateFolderStructure", "Plugins\Blink.Plugin.CreateFolderStructure\Blink.Plugin.CreateFolderStructure.csproj", "{021924BC-6484-4218-A393-6F64021D94A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.CleanseEmpyFolders", "Plugins\Blink.Plugin.CleanseEmpyFolders\Blink.Plugin.CleanseEmpyFolders.csproj", "{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.GenerateSpreadsheet", "Plugins\Blink.Plugin.GenerateSpreadsheet\Blink.Plugin.GenerateSpreadsheet.csproj", "{E2A3C206-0545-499A-B0B1-998888A8DD8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink", "Blink\Blink.csproj", "{1164FC9A-E404-4BB2-9585-102AA687D92B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,17 +29,39 @@ Global
 		{8F493D39-4BBC-4E1C-A664-8FDDED2E79D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F493D39-4BBC-4E1C-A664-8FDDED2E79D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F493D39-4BBC-4E1C-A664-8FDDED2E79D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0D6A5B1-053F-46A4-B798-117C18FDE7B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0D6A5B1-053F-46A4-B798-117C18FDE7B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0D6A5B1-053F-46A4-B798-117C18FDE7B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0D6A5B1-053F-46A4-B798-117C18FDE7B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CDC0F2B-2EED-4EAE-B93F-92D2AA43611B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CDC0F2B-2EED-4EAE-B93F-92D2AA43611B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CDC0F2B-2EED-4EAE-B93F-92D2AA43611B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CDC0F2B-2EED-4EAE-B93F-92D2AA43611B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F737502A-A489-42E5-80FC-4DD451E1B514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F737502A-A489-42E5-80FC-4DD451E1B514}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F737502A-A489-42E5-80FC-4DD451E1B514}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F737502A-A489-42E5-80FC-4DD451E1B514}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79469D0F-5050-4395-9E35-43B95704A245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79469D0F-5050-4395-9E35-43B95704A245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79469D0F-5050-4395-9E35-43B95704A245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79469D0F-5050-4395-9E35-43B95704A245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{021924BC-6484-4218-A393-6F64021D94A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021924BC-6484-4218-A393-6F64021D94A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021924BC-6484-4218-A393-6F64021D94A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021924BC-6484-4218-A393-6F64021D94A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{79469D0F-5050-4395-9E35-43B95704A245} = {9260CA29-C392-435E-9132-2A5006251AA7}
+		{021924BC-6484-4218-A393-6F64021D94A4} = {9260CA29-C392-435E-9132-2A5006251AA7}
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0} = {9260CA29-C392-435E-9132-2A5006251AA7}
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E} = {9260CA29-C392-435E-9132-2A5006251AA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {094D8F52-0272-47EA-BB34-AC93F7F85276}
