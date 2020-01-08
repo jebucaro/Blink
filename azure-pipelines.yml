@@ -31,3 +31,9 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      SET PATH=packages\Tools.InnoSetup.5.6.1\tools
+      iscc Setup\Blink.iss
