@@ -147,6 +147,9 @@ namespace Blink.Core
             }
         }
 
+        /// <summary>
+        /// Runs the Initialize method on all plugins
+        /// </summary>
         public static void InitializePlugins()
         {
             Parallel.ForEach(AllPlugins, pair =>
@@ -155,6 +158,12 @@ namespace Blink.Core
             });
         }
 
+        /// <summary>
+        /// Runs the ExecuteTask method on the plugin returned based on the search criteria
+        /// </summary>
+        /// <param name="pluginSearchType">Search criteria</param>
+        /// <param name="value">Value to be searched</param>
+        /// <param name="path">Working Directory to be used by the plugin</param>
         public static void ExecutePlugin(PluginSearchType pluginSearchType, string value, string path)
         {
             try
@@ -176,29 +185,21 @@ namespace Blink.Core
             }
         }
 
-        public static void ExecutePluginForActionKeyword(string actionKeyword)
-        {
-            try
-            {
-                var duo = GetPluginForActionKeyword(actionKeyword);
-
-                duo.Plugin.ExecuteTask();
-            }
-            catch (BlinkException ex)
-            {
-                throw ex;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
+        /// <summary>
+        /// Returns a PluginDuo that uses the ActionKeyword especified by the search criteria
+        /// </summary>
+        /// <param name="id">Id especified in the plugin.json file of the plugin</param>
+        /// <returns></returns>
         private static PluginDuo GetPluginForId(string id)
         {
             return AllPlugins.FirstOrDefault(o => o.Detail.Id == id);
         }
 
+        /// <summary>
+        /// Returns a PluginDuo that uses the ActionKeyword especified by the search criteria
+        /// </summary>
+        /// <param name="actionKeyword">ActionKeyword especified in the plugin.json file of the plugin</param>
+        /// <returns></returns>
         private static PluginDuo GetPluginForActionKeyword(string actionKeyword)
         {
             return AllPlugins.FirstOrDefault(o => o.Detail.ActionKeyword == actionKeyword);
