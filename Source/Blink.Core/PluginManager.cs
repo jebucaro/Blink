@@ -38,41 +38,57 @@ namespace Blink.Core
     {
         private static readonly string[] Directories = { Constant.PreinstalledDirectory, Constant.PluginsDirectory };
 
-        private static readonly List<PluginDetail> PluginDetails = new List<PluginDetail>();
+        public static IReadOnlyList<PluginDetail> AvailablePlugins { get; private set; }
+        private static readonly List<PluginDuo> AllPlugins = new List<PluginDuo>();
 
-        public static List<PluginDuo> AllPlugins { get; private set; }
+        public enum PluginSearchType
+        {
+            SearchById,
+            SearchByActionKeyword
+        }
+
+        /// <summary>
+        /// Loads all valid plugins including the preinstalled and the ones added by the user in the AppData folder
+        /// </summary>
         public static void LoadPlugins()
         {
+            AllPlugins.Clear();
+
             if (!Directory.Exists(Constant.PluginsDirectory))
             {
                 Directory.CreateDirectory(Constant.PluginsDirectory);
             }
-            
-            Parse(Directories);
 
-            AllPlugins = Plugins(PluginDetails);
+            var pluginsInstalled = Parse();
+
+            AllPlugins.AddRange(GetPlugins(pluginsInstalled));
+
+            AvailablePlugins = AllPlugins.Select(o => o.Detail).ToList().AsReadOnly();
         }
 
-        private static void Parse(string[] pluginDirectories)
+        /// <summary>
+        /// Returns a collection of every PluginDetails available
+        /// </summary>
+        /// <returns></returns>
+        private static IEnumerable<PluginDetail> Parse()
         {
-            PluginDetails.Clear();
+            var directories = Directories.SelectMany(Directory.GetDirectories);
 
-            var directories = pluginDirectories.SelectMany(Directory.GetDirectories);
-            ParsePluginDetails(directories);
-        }
-
-        private static void ParsePluginDetails(IEnumerable<string> directories)
-        {
             foreach (var directory in directories)
             {
                 PluginDetail detail = GetPluginDetail(directory);
                 if (detail != null)
                 {
-                    PluginDetails.Add(detail);
+                    yield return detail;
                 }
             }
         }
 
+        /// <summary>
+        /// Returns a PluginDetail class containing all the data provided by the developer of the plugin
+        /// </summary>
+        /// <param name="pluginDirectory">Plugin directory to be searched</param>
+        /// <returns>PluginDetail</returns>
         private static PluginDetail GetPluginDetail(string pluginDirectory)
         {
             string configPath = Path.Combine(pluginDirectory, Constant.PluginConfigName);
@@ -106,19 +122,14 @@ namespace Blink.Core
             return detail;
         }
 
-        private static List<PluginDuo> Plugins(List<PluginDetail> details)
+        /// <summary>
+        /// Returns a collection of valid Plugins that implements IBlink Interface and their PluginDetails data
+        /// </summary>
+        /// <param name="pluginDetails"></param>
+        /// <returns>IEnumerable<PluginDuo></returns>
+        private static IEnumerable<PluginDuo> GetPlugins(IEnumerable<PluginDetail> pluginDetails)
         {
-            var dotNetPlugins = GetDotNetPlugins(details).ToList();
-
-            return dotNetPlugins;
-        }
-
-        private static IEnumerable<PluginDuo> GetDotNetPlugins(List<PluginDetail> source)
-        {
-            var plugins = new List<PluginDuo>();
-            var details = source;
-
-            foreach (var detail in details)
+            foreach (var detail in pluginDetails)
             {
                 var assembly = Assembly.Load(AssemblyName.GetAssemblyName(detail.PluginFilePath));
                 var types = assembly.GetTypes();
@@ -131,10 +142,9 @@ namespace Blink.Core
                     Plugin = plugin,
                     Detail = detail
                 };
-                plugins.Add(pair);
-            }
 
-            return plugins;
+                yield return pair;
+            }
         }
 
         public static void InitializePlugins()
@@ -145,10 +155,15 @@ namespace Blink.Core
             });
         }
 
-        public static void ExecutePlugin(PluginDuo duo)
+        public static void ExecutePlugin(PluginSearchType pluginSearchType, string value, string path)
         {
             try
             {
+                var duo = pluginSearchType ==
+                    PluginSearchType.SearchById ?
+                        GetPluginForId(value) : GetPluginForActionKeyword(value);
+
+                duo.Plugin.WorkingDirectory = new DirectoryInfo(path);
                 duo.Plugin.ExecuteTask();
             }
             catch (BlinkException ex)
@@ -161,12 +176,30 @@ namespace Blink.Core
             }
         }
 
-        public static PluginDuo GetPluginForId(string id)
+        public static void ExecutePluginForActionKeyword(string actionKeyword)
+        {
+            try
+            {
+                var duo = GetPluginForActionKeyword(actionKeyword);
+
+                duo.Plugin.ExecuteTask();
+            }
+            catch (BlinkException ex)
+            {
+                throw ex;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private static PluginDuo GetPluginForId(string id)
         {
             return AllPlugins.FirstOrDefault(o => o.Detail.Id == id);
         }
 
-        public static PluginDuo GetPluginForActionKeyword(string actionKeyword)
+        private static PluginDuo GetPluginForActionKeyword(string actionKeyword)
         {
             return AllPlugins.FirstOrDefault(o => o.Detail.ActionKeyword == actionKeyword);
         }

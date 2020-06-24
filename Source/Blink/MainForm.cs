@@ -33,15 +33,15 @@ namespace Blink
             nlvPlugins.Columns.Add("Author");
             nlvPlugins.Columns.Add("Website");
 
-            foreach (var item in PluginManager.AllPlugins)
+            foreach (var item in PluginManager.AvailablePlugins)
             {
-                var lvItem = nlvPlugins.Items.Add(item.Detail.Name);
-
-                lvItem.SubItems.Add(item.Detail.ActionKeyword);
-                lvItem.SubItems.Add(item.Detail.Description);
-                lvItem.SubItems.Add(item.Detail.Author);
-                lvItem.SubItems.Add(item.Detail.Website);
-                lvItem.ToolTipText = item.Detail.Description;
+                var lvItem = nlvPlugins.Items.Add(item.Name);
+                lvItem.Tag = item.Id;
+                lvItem.SubItems.Add(item.ActionKeyword);
+                lvItem.SubItems.Add(item.Description);
+                lvItem.SubItems.Add(item.Author);
+                lvItem.SubItems.Add(item.Website);
+                lvItem.ToolTipText = item.Description;
             }
 
             for (int i = 0; i < nlvPlugins.Columns.Count; i++)
@@ -60,26 +60,14 @@ namespace Blink
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            DirectoryInfo workingDirectory;
-
-            try
-            {
-                workingDirectory = new DirectoryInfo(txtWorkingDirectory.Text);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
             if (nlvPlugins.SelectedItems.Count > 0)
             {
-                var item = nlvPlugins.SelectedItems[0];
+                var pluginId = nlvPlugins.SelectedItems[0].Tag.ToString();
 
-                var pluginDuo = PluginManager.GetPluginForActionKeyword(item.SubItems[1].Text);
-
-                pluginDuo.Plugin.WorkingDirectory = workingDirectory;
-
-                PluginManager.ExecutePlugin(pluginDuo);
+                PluginManager.ExecutePlugin(
+                    PluginManager.PluginSearchType.SearchById,
+                    pluginId,
+                    txtWorkingDirectory.Text);
             }
         }
 

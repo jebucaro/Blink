@@ -40,9 +40,8 @@ namespace Blink.Core
         public static readonly string DataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Blink);
         public static readonly string PluginsDirectory = Path.Combine(DataDirectory, Plugins);
 #if DEBUG
-        public static readonly string PreinstalledDirectory = Path.Combine(@"C:\Users\hola\Dev\Blink\Source", Plugins);
+        public static readonly string PreinstalledDirectory = Path.Combine(Directory.GetParent(Directory.GetParent(Directory.GetParent(ProgramDirectory).ToString()).ToString()).ToString(), Plugins);
 #else
-        
         public static readonly string PreinstalledDirectory = Path.Combine(ProgramDirectory, Plugins);
 #endif
 

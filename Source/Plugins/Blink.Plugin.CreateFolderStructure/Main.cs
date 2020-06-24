@@ -43,7 +43,7 @@ namespace Blink.Plugin.CreateFolderStructure
 
         public void Init(PluginDetail pluginDetail)
         {
-            ConfigurationFile = Path.Combine(pluginDetail.PluginDirectory, DefaultConfigurationFile);
+            this.ConfigurationFile = Path.Combine(pluginDetail.PluginDirectory, DefaultConfigurationFile);
         }
 
         /// <summary>
