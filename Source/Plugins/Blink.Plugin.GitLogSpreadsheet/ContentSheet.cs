@@ -90,9 +90,9 @@ namespace Blink.Plugin.GitLogSpreadsheet
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Path].Value = detail.Path;
         }
 
-        private void PrintTable(ExcelWorksheet excelWorksheet, int width, int height)
+        private void PrintTable(ExcelWorksheet excelWorksheet, int rows, int columns)
         {
-            using (var range = excelWorksheet.Cells[1, 1, width, height - 1])
+            using (var range = excelWorksheet.Cells[1, 1, rows - 1, columns])
             {
                 var tblCollection = excelWorksheet.Tables;
                 var table = tblCollection.Add(range, $"Table{excelWorksheet.Name}");
