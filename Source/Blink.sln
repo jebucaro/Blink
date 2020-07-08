@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.GenerateSpread
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink", "Blink\Blink.csproj", "{1164FC9A-E404-4BB2-9585-102AA687D92B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.GitLogSpreadsheet", "Plugins\Blink.Plugin.GitLogSpreadsheet\Blink.Plugin.GitLogSpreadsheet.csproj", "{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{021924BC-6484-4218-A393-6F64021D94A4} = {9260CA29-C392-435E-9132-2A5006251AA7}
 		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0} = {9260CA29-C392-435E-9132-2A5006251AA7}
 		{E2A3C206-0545-499A-B0B1-998888A8DD8E} = {9260CA29-C392-435E-9132-2A5006251AA7}
+		{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A} = {9260CA29-C392-435E-9132-2A5006251AA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {094D8F52-0272-47EA-BB34-AC93F7F85276}

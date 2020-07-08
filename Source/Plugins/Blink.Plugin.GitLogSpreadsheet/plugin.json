@@ -1,0 +1,10 @@
+{
+  "Id": "{E12E8DBF-6877-481C-AA26-CAF5538780AC}",
+  "ActionKeyword": "gitlog",
+  "Name": "Git log to Spreadsheet",
+  "Description": "Creates a spreadsheet with the last ten commits",
+  "Author": "Jonathan Búcaro",
+  "Version": "1.0",
+  "Website": "https://jonathanbucaro.com",
+  "PluginFileName": "Blink.Plugin.GitLogSpreadsheet.dll"
+}
