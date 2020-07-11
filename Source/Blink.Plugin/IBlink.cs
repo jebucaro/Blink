@@ -28,19 +28,9 @@ namespace Blink.Plugin
 {
     public interface IBlink
     {
-        /// <summary>
-        /// Gets or sets the DirectoryInfo of current working directory that acts like a base directory for the current operation
-        /// </summary>
         DirectoryInfo WorkingDirectory { get; set; }
 
-        /// <summary>
-        /// Setup current plugin
-        /// </summary>
         void Init(PluginDetail pluginDetail);
-
-        /// <summary>
-        /// Execute the main purpose task for current plugin
-        /// </summary>
         void ExecuteTask();
     }
 }

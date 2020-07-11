@@ -10,11 +10,10 @@ using LibGit2Sharp;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
-namespace Blink.Plugin.GitLogSpreadsheet
+namespace Blink.Plugin.GitLog
 {
     class ContentSheet
     {
-
         private const string HeaderSheet_Name = "Commits";
         private const string DetailSheet_Name = "Detail";
 
@@ -24,9 +23,9 @@ namespace Blink.Plugin.GitLogSpreadsheet
         private const string ColumnName_AuthorName = "Author Name";
         private const string ColumnName_AuthorEmail = "Author Email";
         
-        private const string ColumnName_Correlative = "Correlative";
         private const string ColumnName_Status = "Status";
         private const string ColumnName_Path = "Path";
+        private const string ColumnName_File = "File";
 
         private const int ColumnPosition_Commit = 1;
         private const int ColumnPosition_Sha = 2;
@@ -34,24 +33,18 @@ namespace Blink.Plugin.GitLogSpreadsheet
         private const int ColumnPosition_AuthorName = 4;
         private const int ColumnPosition_AuthorEmail = 5;
 
-        private const int ColumnPosition_Correlative = 2;
-        private const int ColumnPosition_Status = 3;
-        private const int ColumnPosition_Path = 4;
+        private const int ColumnPosition_Status = 2;
+        private const int ColumnPosition_Path = 3;
+        private const int ColumnPosition_File = 4;
 
         public bool AutoFitColumns { get; set; }
         public bool ShowGridLines { get; set; }
-        public int InitialRow { get; set; }
-        public int InitialColumn { get; set; }
         
         int CurrentRowHeader;
         int CurrentRowDetail;
-        int CurrentCorrelative;
 
         public ContentSheet()
         {
-            InitialRow = 1;
-            InitialColumn = 1;
-            CurrentCorrelative = 1;
             CurrentRowHeader = 1;
             CurrentRowDetail = 1;
         }
@@ -68,9 +61,9 @@ namespace Blink.Plugin.GitLogSpreadsheet
         private void PrintDetailColumnTitles(ExcelWorksheet excelWorksheet)
         {
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Commit].Value = ColumnName_Commit;
-            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Correlative].Value = ColumnName_Correlative;
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Status].Value = ColumnName_Status;
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Path].Value = ColumnName_Path;
+            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_File].Value = ColumnName_File;
         }
 
         private void PrintHeader(ExcelWorksheet excelWorksheet, CommitInfo commit)
@@ -85,9 +78,9 @@ namespace Blink.Plugin.GitLogSpreadsheet
         private void PrintDetail(ExcelWorksheet excelWorksheet, CommitDetail detail)
         {
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Commit].Value = CurrentRowHeader - 1;
-            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Correlative].Value = CurrentCorrelative;
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Status].Value = detail.Status;
-            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Path].Value = detail.Path;
+            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Path].Value = Path.GetDirectoryName(detail.Path);
+            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_File].Value = Path.GetFileName(detail.Path);
         }
 
         private void PrintTable(ExcelWorksheet excelWorksheet, int rows, int columns)
@@ -118,33 +111,36 @@ namespace Blink.Plugin.GitLogSpreadsheet
                     {
                         PrintHeader(headerSheet, commit);
 
-                        CurrentCorrelative = 1;
-
                         foreach (var detail in commit.Detail)
                         {
                             PrintDetail(detailSheet, detail);
                             CurrentRowDetail++;
-                            CurrentCorrelative++;
                         }
 
                         CurrentRowHeader++;
                     }
 
-                    detailSheet.Cells.AutoFitColumns();
-                    detailSheet.View.ShowGridLines = false;
+                    if (AutoFitColumns)
+                    {
+                        headerSheet.Cells.AutoFitColumns();
+                        detailSheet.Cells.AutoFitColumns();
+                    }
 
-                    headerSheet.Cells.AutoFitColumns();
-                    headerSheet.View.ShowGridLines = false;
+                    if (!ShowGridLines)
+                    {
+                        headerSheet.View.ShowGridLines = false;
+                        detailSheet.View.ShowGridLines = false;
+                    }
 
                     PrintTable(headerSheet, CurrentRowHeader, ColumnPosition_AuthorEmail);
-                    PrintTable(detailSheet, CurrentRowDetail, ColumnPosition_Path);
+                    PrintTable(detailSheet, CurrentRowDetail, ColumnPosition_File);
 
                     excelPackage.Save();
                 };
             };
 
-            
-
+            CurrentRowDetail = 1;
+            CurrentRowHeader = 1;
         }
 
     }

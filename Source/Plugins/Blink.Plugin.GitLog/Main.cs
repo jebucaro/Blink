@@ -1,18 +1,23 @@
 ﻿using LibGit2Sharp;
 using OfficeOpenXml;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Blink.Plugin.GitLogSpreadsheet
+namespace Blink.Plugin.GitLog
 {
     public class Main : IBlink
     {
+        public string FileName { get; private set; }
         public DirectoryInfo WorkingDirectory { get; set; }
+
+        private ContentSheet _contentSheet;
+
+        public Main()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+        }
 
         private CustomGitLog GetLogFromWorkingDirectory(string path)
         {
@@ -25,7 +30,7 @@ namespace Blink.Plugin.GitLogSpreadsheet
                     result.Path = path;
                     result.BranchName = repository.Head.FriendlyName;
 
-                    foreach (Commit commit in repository.Commits.Take(10))
+                    foreach (Commit commit in repository.Commits.Take(25))
                     {
 
                         CommitInfo commitInfo = new CommitInfo()
@@ -68,16 +73,22 @@ namespace Blink.Plugin.GitLogSpreadsheet
 
         private void GenerateExcelFile(CustomGitLog customGitLog)
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            string fileName = GenerateTemporaryFileName("xlsx");
-            FileInfo newFile = new FileInfo(fileName);
+            
+            FileName = GenerateTemporaryFileName("xlsx");
+            FileInfo newFile = new FileInfo(FileName);
 
             using (var pck = new ExcelPackage(newFile))
             {
-
-                ContentSheet cs = new ContentSheet();
-
-                cs.Generate(pck, customGitLog);
+                try
+                {
+                    _contentSheet.ShowGridLines = false;
+                    _contentSheet.AutoFitColumns = true;
+                    _contentSheet.Generate(pck, customGitLog);
+                }
+                catch (Exception ex)
+                {
+                    throw new BlinkException($"There was an error while generating the Spreadsheet file: {ex.Message}");
+                }
 
                 try
                 {
@@ -88,8 +99,6 @@ namespace Blink.Plugin.GitLogSpreadsheet
                     throw new BlinkException($"There was an error while opening the Spreadsheet file: {ex.Message} with current associated program.");
                 }
             }
-
-
         }
 
         /// <summary>
@@ -114,7 +123,7 @@ namespace Blink.Plugin.GitLogSpreadsheet
 
         public void Init(PluginDetail pluginDetail)
         {
-            //
+            _contentSheet = new ContentSheet();
         }
     }
 }

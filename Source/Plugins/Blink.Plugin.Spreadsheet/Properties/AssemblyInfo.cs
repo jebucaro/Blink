@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("Blink.Plugin.CleanseEmpyFolders")]
+[assembly: AssemblyTitle("Blink.Plugin.Spreadsheet")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Blink.Plugin.CleanseEmpyFolders")]
+[assembly: AssemblyProduct("Blink.Plugin.Spreadsheet")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
-[assembly: Guid("0b88d1e2-0919-4e7f-ba0b-ea58ffe33ae0")]
+[assembly: Guid("e2a3c206-0545-499a-b0b1-998888a8dd8e")]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //

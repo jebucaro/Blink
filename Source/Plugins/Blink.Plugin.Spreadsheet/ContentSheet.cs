@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
-namespace Blink.Plugin.GenerateSpreadsheet
+namespace Blink.Plugin.Spreadsheet
 {
     public abstract class ContentSheet
     {

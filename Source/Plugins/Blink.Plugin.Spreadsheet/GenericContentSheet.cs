@@ -2,7 +2,7 @@
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
-namespace Blink.Plugin.GenerateSpreadsheet
+namespace Blink.Plugin.Spreadsheet
 {
     public class GenericContentSheet : ContentSheet
     {
@@ -15,6 +15,7 @@ namespace Blink.Plugin.GenerateSpreadsheet
         private const int ColumnPosition_Fullname = 2;
         private const int ColumnPosition_Extension = 3;
         private const int ColumnPosition_Path = 4;
+        
         protected override void PrintContentRow(ExcelWorksheet excelWorksheet, FileInfo fileInfo)
         {
             excelWorksheet.Cells[CurrentRow, ColumnPosition_Number].Value = CurrentRow - InitialRow;

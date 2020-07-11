@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blink.Plugin.GitLogSpreadsheet
+namespace Blink.Plugin.GitLog
 {
     class CommitDetail
     {

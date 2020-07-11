@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E2A3C206-0545-499A-B0B1-998888A8DD8E}</ProjectGuid>
+    <ProjectGuid>{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Blink.Plugin.GenerateSpreadsheet</RootNamespace>
-    <AssemblyName>Blink.Plugin.GenerateSpreadsheet</AssemblyName>
+    <RootNamespace>Blink.Plugin.Cleanse</RootNamespace>
+    <AssemblyName>Blink.Plugin.Cleanse</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,15 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentSheet.cs" />
-    <Compile Include="GenericContentSheet.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,13 +49,8 @@
       <Project>{8f493d39-4bbc-4e1c-a664-8fdded2e79d9}</Project>
       <Name>Blink.Plugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Blink.Plugin.CommonConfiguration\Blink.Plugin.CommonConfiguration.csproj">
-      <Project>{79469d0f-5050-4395-9e35-43b95704a245}</Project>
-      <Name>Blink.Plugin.CommonConfiguration</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="plugin.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

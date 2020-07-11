@@ -2,16 +2,13 @@
 using System;
 using System.IO;
 
-namespace Blink.Plugin.CreateFolderStructure
+namespace Blink.Plugin.FolderStructure
 {
     public class Main : JsonConfigurationFile<Folder>, IBlink
     {
         private const string DefaultConfigurationFile = "folder.settings.json";
         public DirectoryInfo WorkingDirectory { get; set; }
 
-        /// <summary>
-        /// Creates a folder structure based on configuration file
-        /// </summary>
         public void ExecuteTask()
         {
             try
@@ -46,9 +43,6 @@ namespace Blink.Plugin.CreateFolderStructure
             this.ConfigurationFile = Path.Combine(pluginDetail.PluginDirectory, DefaultConfigurationFile);
         }
 
-        /// <summary>
-        /// Creates a folder structure based on configuration file
-        /// </summary>
         private void CreateFolders()
         {
             var currentPath = string.Empty;
@@ -84,11 +78,6 @@ namespace Blink.Plugin.CreateFolderStructure
             }
         }
 
-        /// <summary>
-        /// Creates a folder structure based on configuration file
-        /// </summary>
-        /// <param name="folder">Current node</param>
-        /// <param name="rootPath">Parent Directory path</param>
         private void CreateFolders(Folder folder, string rootPath)
         {
             var currentPath = string.Empty;

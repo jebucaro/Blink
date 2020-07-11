@@ -11,15 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Core", "Blink.Core\Bl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.CommonConfiguration", "Plugins\Blink.Plugin.CommonConfiguration\Blink.Plugin.CommonConfiguration.csproj", "{79469D0F-5050-4395-9E35-43B95704A245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.CreateFolderStructure", "Plugins\Blink.Plugin.CreateFolderStructure\Blink.Plugin.CreateFolderStructure.csproj", "{021924BC-6484-4218-A393-6F64021D94A4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.CleanseEmpyFolders", "Plugins\Blink.Plugin.CleanseEmpyFolders\Blink.Plugin.CleanseEmpyFolders.csproj", "{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.GenerateSpreadsheet", "Plugins\Blink.Plugin.GenerateSpreadsheet\Blink.Plugin.GenerateSpreadsheet.csproj", "{E2A3C206-0545-499A-B0B1-998888A8DD8E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink", "Blink\Blink.csproj", "{1164FC9A-E404-4BB2-9585-102AA687D92B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.GitLogSpreadsheet", "Plugins\Blink.Plugin.GitLogSpreadsheet\Blink.Plugin.GitLogSpreadsheet.csproj", "{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.GitLog", "Plugins\Blink.Plugin.GitLog\Blink.Plugin.GitLog.csproj", "{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.FolderStructure", "Plugins\Blink.Plugin.FolderStructure\Blink.Plugin.FolderStructure.csproj", "{021924BC-6484-4218-A393-6F64021D94A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.Spreadsheet", "Plugins\Blink.Plugin.Spreadsheet\Blink.Plugin.Spreadsheet.csproj", "{E2A3C206-0545-499A-B0B1-998888A8DD8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blink.Plugin.Cleanse", "Plugins\Blink.Plugin.Cleanse\Blink.Plugin.Cleanse.csproj", "{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,18 +39,6 @@ Global
 		{79469D0F-5050-4395-9E35-43B95704A245}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79469D0F-5050-4395-9E35-43B95704A245}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79469D0F-5050-4395-9E35-43B95704A245}.Release|Any CPU.Build.0 = Release|Any CPU
-		{021924BC-6484-4218-A393-6F64021D94A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{021924BC-6484-4218-A393-6F64021D94A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{021924BC-6484-4218-A393-6F64021D94A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{021924BC-6484-4218-A393-6F64021D94A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1164FC9A-E404-4BB2-9585-102AA687D92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,16 +47,28 @@ Global
 		{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{021924BC-6484-4218-A393-6F64021D94A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021924BC-6484-4218-A393-6F64021D94A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021924BC-6484-4218-A393-6F64021D94A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021924BC-6484-4218-A393-6F64021D94A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{79469D0F-5050-4395-9E35-43B95704A245} = {9260CA29-C392-435E-9132-2A5006251AA7}
-		{021924BC-6484-4218-A393-6F64021D94A4} = {9260CA29-C392-435E-9132-2A5006251AA7}
-		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0} = {9260CA29-C392-435E-9132-2A5006251AA7}
-		{E2A3C206-0545-499A-B0B1-998888A8DD8E} = {9260CA29-C392-435E-9132-2A5006251AA7}
 		{A0EB735B-2FDA-4AAD-9B73-F9B59DDAA32A} = {9260CA29-C392-435E-9132-2A5006251AA7}
+		{021924BC-6484-4218-A393-6F64021D94A4} = {9260CA29-C392-435E-9132-2A5006251AA7}
+		{E2A3C206-0545-499A-B0B1-998888A8DD8E} = {9260CA29-C392-435E-9132-2A5006251AA7}
+		{0B88D1E2-0919-4E7F-BA0B-EA58FFE33AE0} = {9260CA29-C392-435E-9132-2A5006251AA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {094D8F52-0272-47EA-BB34-AC93F7F85276}

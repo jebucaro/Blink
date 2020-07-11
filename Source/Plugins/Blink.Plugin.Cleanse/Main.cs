@@ -2,15 +2,12 @@
 using System.IO;
 using System.Linq;
 
-namespace Blink.Plugin.CleanseEmpyFolders
+namespace Blink.Plugin.Cleanse
 {
     public class Main : IBlink
     {
         public DirectoryInfo WorkingDirectory { get; set; }
 
-        /// <summary>
-        /// Cleanse empty folders
-        /// </summary>
         public void ExecuteTask()
         {
             CleanseFolder(WorkingDirectory.FullName);
@@ -21,10 +18,6 @@ namespace Blink.Plugin.CleanseEmpyFolders
             //
         }
 
-        /// <summary>
-        /// Cleanse empty folders
-        /// </summary>
-        /// <param name="startLocation">Directory that is going to be cleansed</param>
         private void CleanseFolder(string startLocation)
         {
             var folder = startLocation;

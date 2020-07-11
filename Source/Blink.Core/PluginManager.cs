@@ -47,9 +47,6 @@ namespace Blink.Core
             SearchByActionKeyword
         }
 
-        /// <summary>
-        /// Loads all valid plugins including the preinstalled and the ones added by the user in the AppData folder
-        /// </summary>
         public static void LoadPlugins()
         {
             AllPlugins.Clear();
@@ -66,10 +63,6 @@ namespace Blink.Core
             AvailablePlugins = AllPlugins.Select(o => o.Detail).ToList().AsReadOnly();
         }
 
-        /// <summary>
-        /// Returns a collection of every PluginDetails available
-        /// </summary>
-        /// <returns></returns>
         private static IEnumerable<PluginDetail> Parse()
         {
             var directories = Directories.SelectMany(Directory.GetDirectories);
@@ -84,11 +77,6 @@ namespace Blink.Core
             }
         }
 
-        /// <summary>
-        /// Returns a PluginDetail class containing all the data provided by the developer of the plugin
-        /// </summary>
-        /// <param name="pluginDirectory">Plugin directory to be searched</param>
-        /// <returns>PluginDetail</returns>
         private static PluginDetail GetPluginDetail(string pluginDirectory)
         {
             string configPath = Path.Combine(pluginDirectory, Constant.PluginConfigName);
@@ -122,11 +110,6 @@ namespace Blink.Core
             return detail;
         }
 
-        /// <summary>
-        /// Returns a collection of valid Plugins that implements IBlink Interface and their PluginDetails data
-        /// </summary>
-        /// <param name="pluginDetails"></param>
-        /// <returns>IEnumerable<PluginDuo></returns>
         private static IEnumerable<PluginDuo> GetPlugins(IEnumerable<PluginDetail> pluginDetails)
         {
             foreach (var detail in pluginDetails)
@@ -147,9 +130,6 @@ namespace Blink.Core
             }
         }
 
-        /// <summary>
-        /// Runs the Initialize method on all plugins
-        /// </summary>
         public static void InitializePlugins()
         {
             Parallel.ForEach(AllPlugins, pair =>
@@ -158,12 +138,22 @@ namespace Blink.Core
             });
         }
 
-        /// <summary>
-        /// Runs the ExecuteTask method on the plugin returned based on the search criteria
-        /// </summary>
-        /// <param name="pluginSearchType">Search criteria</param>
-        /// <param name="value">Value to be searched</param>
-        /// <param name="path">Working Directory to be used by the plugin</param>
+        public static void InitializePlugin(PluginSearchType pluginSearchType, string value)
+        {
+            try
+            {
+                var duo = pluginSearchType ==
+                    PluginSearchType.SearchById ?
+                        GetPluginForId(value) : GetPluginForActionKeyword(value);
+
+                duo.Plugin.Init(duo.Detail);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static void ExecutePlugin(PluginSearchType pluginSearchType, string value, string path)
         {
             try
@@ -185,21 +175,11 @@ namespace Blink.Core
             }
         }
 
-        /// <summary>
-        /// Returns a PluginDuo that uses the ActionKeyword especified by the search criteria
-        /// </summary>
-        /// <param name="id">Id especified in the plugin.json file of the plugin</param>
-        /// <returns></returns>
         private static PluginDuo GetPluginForId(string id)
         {
             return AllPlugins.FirstOrDefault(o => o.Detail.Id == id);
         }
 
-        /// <summary>
-        /// Returns a PluginDuo that uses the ActionKeyword especified by the search criteria
-        /// </summary>
-        /// <param name="actionKeyword">ActionKeyword especified in the plugin.json file of the plugin</param>
-        /// <returns></returns>
         private static PluginDuo GetPluginForActionKeyword(string actionKeyword)
         {
             return AllPlugins.FirstOrDefault(o => o.Detail.ActionKeyword == actionKeyword);

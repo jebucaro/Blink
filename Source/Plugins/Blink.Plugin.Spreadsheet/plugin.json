@@ -1,10 +1,10 @@
 ﻿{
 	"Id": "{448EC3D2-FD6F-4EDE-A84D-5C989063E963}",
 	"ActionKeyword": "spreadsheet",
-	"Name": "Generate spreadsheet",
+	"Name": "Folder to Spreadsheet",
 	"Description": "Creates a spreadsheet with the list of all files inside current working directory",
 	"Author": "Jonathan Búcaro",
 	"Version": "1.0",
 	"Website": "https://jonathanbucaro.com",
-	"PluginFileName": "Blink.Plugin.GenerateSpreadsheet.dll"
+	"PluginFileName": "Blink.Plugin.Spreadsheet.dll"
 }

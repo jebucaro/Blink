@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("Blink.Plugin.GenerateSpreadsheet")]
+[assembly: AssemblyTitle("Blink.Plugin.GitLog")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Blink.Plugin.GenerateSpreadsheet")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyProduct("Blink.Plugin.GitLog")]
+[assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
-[assembly: Guid("e2a3c206-0545-499a-b0b1-998888a8dd8e")]
+[assembly: Guid("a0eb735b-2fda-4aad-9b73-f9b59ddaa32a")]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //

@@ -7,13 +7,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-namespace Blink.Plugin.GenerateSpreadsheet
+namespace Blink.Plugin.Spreadsheet
 {
     public class Main : JsonConfigurationFile<Folder>, IBlink
     {
         private const string DefaultConfigurationFile = "folder.settings.json";
         private const string LabelAll = "(All)";
-        private ContentSheet ContentSheet;
+        private ContentSheet _contentSheet;
         private HashSet<string> _listOfLabels;
         private Dictionary<string, List<FileInfo>> _map;
 
@@ -25,7 +25,7 @@ namespace Blink.Plugin.GenerateSpreadsheet
 
         private void Initialize(ContentSheet contentSheet)
         {
-            ContentSheet = contentSheet;
+            _contentSheet = contentSheet;
         }
 
         /// <summary>
@@ -33,10 +33,12 @@ namespace Blink.Plugin.GenerateSpreadsheet
         /// </summary>
         public Main()
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             Initialize(new GenericContentSheet());
 
-            ContentSheet.ShowGridLines = false;
-            ContentSheet.AutoFitColumns = true;
+            _contentSheet.ShowGridLines = false;
+            _contentSheet.AutoFitColumns = true;
         }
 
         public Main(ContentSheet contentSheet)
@@ -189,14 +191,14 @@ namespace Blink.Plugin.GenerateSpreadsheet
                     if (!entry.Value.Any())
                         continue;
 
-                    ContentSheet.SheetName = entry.Key;
-                    ContentSheet.Content = entry.Value;
-                    ContentSheet.BaseFolder = WorkingDirectory.FullName;
-                    ContentSheet.TableCorrelative = ++tableNumber;
+                    _contentSheet.SheetName = entry.Key;
+                    _contentSheet.Content = entry.Value;
+                    _contentSheet.BaseFolder = WorkingDirectory.FullName;
+                    _contentSheet.TableCorrelative = ++tableNumber;
 
                     try
                     {
-                        ContentSheet.Generate(pck);
+                        _contentSheet.Generate(pck);
                     }
                     catch (Exception ex)
                     {
@@ -223,7 +225,7 @@ namespace Blink.Plugin.GenerateSpreadsheet
         private static string GenerateTemporaryFileName(string extension)
         {
             var tempPath = Path.GetTempPath();
-            var fileName = $"{Guid.NewGuid().ToString()}.{extension}";
+            var fileName = $"{Guid.NewGuid()}.{extension}";
 
             return Path.Combine(tempPath, fileName);
         }
