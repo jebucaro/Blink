@@ -24,8 +24,9 @@ namespace Blink.Plugin.GitLog
         private const string ColumnName_AuthorEmail = "Author Email";
         
         private const string ColumnName_Status = "Status";
-        private const string ColumnName_Path = "Path";
+        private const string ColumnName_Path = "Relative Path";
         private const string ColumnName_File = "File";
+        private const string ColumnName_Extension = "Extension";
 
         private const int ColumnPosition_Commit = 1;
         private const int ColumnPosition_Sha = 2;
@@ -34,8 +35,9 @@ namespace Blink.Plugin.GitLog
         private const int ColumnPosition_AuthorEmail = 5;
 
         private const int ColumnPosition_Status = 2;
-        private const int ColumnPosition_Path = 3;
-        private const int ColumnPosition_File = 4;
+        private const int ColumnPosition_File = 3;
+        private const int ColumnPosition_Extension = 4;
+        private const int ColumnPosition_Path = 5;
 
         public bool AutoFitColumns { get; set; }
         public bool ShowGridLines { get; set; }
@@ -62,8 +64,9 @@ namespace Blink.Plugin.GitLog
         {
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Commit].Value = ColumnName_Commit;
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Status].Value = ColumnName_Status;
-            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Path].Value = ColumnName_Path;
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_File].Value = ColumnName_File;
+            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Extension].Value = ColumnName_Extension;
+            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Path].Value = ColumnName_Path;
         }
 
         private void PrintHeader(ExcelWorksheet excelWorksheet, CommitInfo commit)
@@ -79,8 +82,9 @@ namespace Blink.Plugin.GitLog
         {
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Commit].Value = CurrentRowHeader - 1;
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Status].Value = detail.Status;
-            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Path].Value = Path.GetDirectoryName(detail.Path);
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_File].Value = Path.GetFileName(detail.Path);
+            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Extension].Value = Path.GetExtension(detail.Path);
+            excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Path].Value = Path.GetDirectoryName(detail.Path);
         }
 
         private void PrintTable(ExcelWorksheet excelWorksheet, int rows, int columns)
@@ -133,7 +137,7 @@ namespace Blink.Plugin.GitLog
                     }
 
                     PrintTable(headerSheet, CurrentRowHeader, ColumnPosition_AuthorEmail);
-                    PrintTable(detailSheet, CurrentRowDetail, ColumnPosition_File);
+                    PrintTable(detailSheet, CurrentRowDetail, ColumnPosition_Path);
 
                     excelPackage.Save();
                 };

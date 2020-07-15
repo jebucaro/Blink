@@ -101,11 +101,6 @@ namespace Blink.Plugin.GitLog
             }
         }
 
-        /// <summary>
-        /// Generates a random file name inside TempPath
-        /// </summary>
-        /// <param name="extension">Extension for temporary file</param>
-        /// <returns>Full path to temporary file</returns>
         private static string GenerateTemporaryFileName(string extension = "")
         {
             var fileName = string.Concat(Path.GetRandomFileName().Replace(".", ""),

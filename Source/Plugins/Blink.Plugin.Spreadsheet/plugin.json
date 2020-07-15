@@ -6,5 +6,6 @@
 	"Author": "Jonathan Búcaro",
 	"Version": "1.0",
 	"Website": "https://jonathanbucaro.com",
-	"PluginFileName": "Blink.Plugin.Spreadsheet.dll"
+	"PluginFileName": "Blink.Plugin.Spreadsheet.dll",
+	"PluginIcon": "icon.png"
 }

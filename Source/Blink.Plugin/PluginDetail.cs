@@ -33,6 +33,8 @@ namespace Blink.Plugin
         public string Author { get; set; }
         public string Version { get; set; }
         public string Website { get; set; }
+        public string PluginIcon { get; set; }
+        public string PluginIconPath { get; private set; }
         public string PluginFileName { get; set; }
         public string PluginFilePath { get; private set; }
 
@@ -48,6 +50,7 @@ namespace Blink.Plugin
             {
                 _pluginDirectory = value;
                 PluginFilePath = System.IO.Path.Combine(value, PluginFileName);
+                PluginIconPath = System.IO.Path.Combine(value, PluginIcon);
             }
         }
 

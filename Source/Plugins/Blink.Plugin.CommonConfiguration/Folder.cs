@@ -11,9 +11,6 @@ namespace Blink.Plugin.CommonConfiguration
     {
         private string _name;
 
-        /// <summary>
-        /// Gets or sets Name of the Directory
-        /// </summary>
         [JsonProperty("name")]
         public string Name
         {
@@ -30,22 +27,13 @@ namespace Blink.Plugin.CommonConfiguration
             }
         }
 
-        /// <summary>
-        /// Gets or sets the label asigned to current Directory, ignored when blank or when Browsable is false
-        /// </summary>
         [JsonProperty("label")]
         public string Label { get; set; }
 
-        /// <summary>
-        /// Gets or sets whether or not all files inside current directory will be listed using the asociated label
-        /// </summary>
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool Browsable { get; set; }
 
-        /// <summary>
-        /// Gets or sets nodes of the type Branch
-        /// </summary>
         [JsonProperty("subfolders")]
         public List<Folder> SubFolders { get; set; }
     }
