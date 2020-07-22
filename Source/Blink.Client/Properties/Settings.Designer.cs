@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Blink.Properties
+namespace Blink.Client.Properties
 {
 
 
