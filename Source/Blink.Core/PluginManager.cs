@@ -140,48 +140,44 @@ namespace Blink.Core
 
         public void InitializePlugin(PluginSearchType pluginSearchType, string value)
         {
-            try
-            {
-                var duo = pluginSearchType ==
+            var duo = pluginSearchType ==
                     PluginSearchType.SearchById ?
                         GetPluginForId(value) : GetPluginForActionKeyword(value);
 
-                duo.Plugin.Init(duo.Detail);
+            duo.Plugin.Init(duo.Detail);
+        }
+
+        public void ExecutePlugin(PluginSearchType pluginSearchType, string value, string path)
+        {
+            var duo = pluginSearchType ==
+                    PluginSearchType.SearchById ?
+                        GetPluginForId(value) : GetPluginForActionKeyword(value);
+
+            try
+            {
+                duo.Plugin.WorkingDirectory = new DirectoryInfo(path);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        }
-
-        public void ExecutePlugin(PluginSearchType pluginSearchType, string value, string path)
-        {
-            try
-            {
-                var duo = pluginSearchType ==
-                    PluginSearchType.SearchById ?
-                        GetPluginForId(value) : GetPluginForActionKeyword(value);
-
-                duo.Plugin.WorkingDirectory = new DirectoryInfo(path);
-                duo.Plugin.ExecuteTask();
-            }
-            catch (BlinkException ex)
-            {
-                throw ex;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            
+            duo.Plugin.ExecuteTask();
         }
 
         private PluginDuo GetPluginForId(string id)
         {
+            if (string.IsNullOrWhiteSpace(id))
+                throw new ArgumentNullException(nameof(id));
+
             return AllPlugins.FirstOrDefault(o => o.Detail.Id == id);
         }
 
         private PluginDuo GetPluginForActionKeyword(string actionKeyword)
         {
+            if (string.IsNullOrWhiteSpace(actionKeyword))
+                throw new ArgumentNullException(nameof(actionKeyword));
+
             return AllPlugins.FirstOrDefault(o => o.Detail.ActionKeyword == actionKeyword);
         }
     }

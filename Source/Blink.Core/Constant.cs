@@ -28,7 +28,7 @@ using System.Reflection;
 
 namespace Blink.Core
 {
-    public static class Constant
+    static class Constant
     {
         public const string Blink = "Blink";
         public const string Plugins = "Plugins";
