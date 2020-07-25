@@ -30,7 +30,6 @@ namespace Blink.Plugin.FolderStructure
 {
     public class Main : JsonConfigurationFile<Folder>, IBlink
     {
-        private const string DefaultConfigurationFile = "folder.settings.json";
         public DirectoryInfo WorkingDirectory { get; set; }
 
         public void ExecuteTask()
@@ -64,7 +63,8 @@ namespace Blink.Plugin.FolderStructure
 
         public void Init(PluginDetail pluginDetail)
         {
-            this.ConfigurationFile = Path.Combine(pluginDetail.PluginDirectory, DefaultConfigurationFile);
+            if (string.IsNullOrWhiteSpace(ConfigurationFile))
+                ConfigurationFile = Path.Combine(pluginDetail.PluginDirectory, DefaultConfigurationFile);
         }
 
         private void CreateFolders()

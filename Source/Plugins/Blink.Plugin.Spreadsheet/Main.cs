@@ -35,7 +35,6 @@ namespace Blink.Plugin.Spreadsheet
 {
     public class Main : JsonConfigurationFile<Folder>, IBlink
     {
-        private const string DefaultConfigurationFile = "folder.settings.json";
         private const string LabelAll = "(All)";
         private ContentSheet _contentSheet;
         private HashSet<string> _listOfLabels;
@@ -66,6 +65,29 @@ namespace Blink.Plugin.Spreadsheet
 
         public void ExecuteTask()
         {
+            try
+            {
+                LoadConfiguration();
+            }
+            catch (FileNotFoundException)
+            {
+                throw new BlinkException($"Unable to find configuration file: \"{ConfigurationFile}\".");
+            }
+            catch (DirectoryNotFoundException)
+            {
+                throw new BlinkException(
+                    $"Unable to access Blink application directory \"{AppDomain.CurrentDomain.BaseDirectory}\".");
+            }
+            catch (FormatException ex)
+            {
+                throw new BlinkException(
+                    $"Invalid Directory name: \"{ex.Message}\", check your \"{ConfigurationFile}\" file.");
+            }
+            catch (Exception ex)
+            {
+                throw new BlinkException(
+                    $"There was an error while parsing configuration file: \"{ConfigurationFile}\".", ex);
+            }
 
             _listOfLabels = new HashSet<string>();
             _map = new Dictionary<string, List<FileInfo>>();
@@ -79,7 +101,8 @@ namespace Blink.Plugin.Spreadsheet
 
         public void Init(PluginDetail pluginDetail)
         {
-            ConfigurationFile = Path.Combine(pluginDetail.PluginDirectory, DefaultConfigurationFile);
+            if (string.IsNullOrWhiteSpace(ConfigurationFile))
+                ConfigurationFile = Path.Combine(pluginDetail.PluginDirectory, DefaultConfigurationFile);
         }
 
         private void GenerateListOfLabels()
