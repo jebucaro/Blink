@@ -1,7 +1,11 @@
 ﻿[
 	{
 		"name": "Código Fuente",
-		"branch": [
+		"subfolders": [
+			{
+				"name": "Presentación",
+				"label": "Capa - Presentación"
+			},
 			{
 				"name": "Aplicación",
 				"label": "Capa - Aplicación"
@@ -9,25 +13,24 @@
 			{
 				"name": "Datos",
 				"label": "Capa - Datos"
-			},
-			{
-				"name": "Presentación",
-				"label": "Capa - Presentación"
 			}
 		]
 	},
 	{
 		"name": "Documentación",
 		"browsable": false,
-		"branch": [
+		"subfolders": [
 			{
-				"name": "Documentación Técnica"
+				"name": "Requerimiento"
+			},
+			{
+				"name": "Minutas"
 			},
 			{
 				"name": "Manuales"
 			},
 			{
-				"name": "Evidencia de Pruebas"
+				"name": "Documentación Técnica"
 			}
 		]
 	}

@@ -65,7 +65,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="plugin.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
