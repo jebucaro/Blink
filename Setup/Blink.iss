@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define ApplicationName 'Blink'
-#define ApplicationVersion GetFileVersion('..\Source\BlinkClient\bin\Release\BlinkClient.exe')
+#define ApplicationVersion GetFileVersion('..\Source\Blink.Client\bin\Release\Blink.Client.exe')
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -33,100 +33,100 @@ LicenseFile             = Resources\mit_license.txt
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "..\Source\Blink.Client\bin\Release\Blink.Client.exe";             DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Source\Blink.Client\bin\Release\Blink.Client.exe.config";      DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Source\Blink.Client\bin\Release\Blink.Core.dll";               DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Source\Blink.Client\bin\Release\Blink.Plugin.dll";             DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Source\Blink.Client\bin\Release\CommandLine.dll";              DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Source\Blink.Client\bin\Release\CommandLine.xml";              DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Source\Blink.Client\bin\Release\Newtonsoft.Json.dll";          DestDir: "{userappdata}\Blink"; Flags: replacesameversion
-Source: "..\Source\Blink.Client\bin\Release\Newtonsoft.Json.xml";          DestDir: "{userappdata}\Blink"; Flags: replacesameversion
+; Blink 
+Source: "..\Source\Blink.Client\bin\Release\Blink.Client.exe";                                                DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\Blink.Client.exe.config";                                         DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\Blink.Core.dll";                                                  DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\Blink.Plugin.dll";                                                DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\CommandLine.dll";                                                 DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\CommandLine.xml";                                                 DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\Newtonsoft.Json.dll";                                             DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\Newtonsoft.Json.xml";                                             DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+; assets
+Source: "Resources\folder.ico";                                                                               DestDir: "{userappdata}\Blink";                                           Flags: ignoreversion
+Source: "Resources\spreadsheet.ico";                                                                          DestDir: "{userappdata}\Blink";                                           Flags: ignoreversion
+Source: "Resources\lightbulb.ico";                                                                            DestDir: "{userappdata}\Blink";                                           Flags: ignoreversion
+Source: "Resources\delete.ico";                                                                               DestDir: "{userappdata}\Blink";                                           Flags: ignoreversion
+Source: "Resources\gitlog.ico";                                                                               DestDir: "{userappdata}\Blink";                                           Flags: ignoreversion
+Source: "..\Source\Plugins\Blink.Plugin.CommonConfiguration\bin\Release\folder.settings.json";                DestDir: "{userdocs}\Blink\CommonConfiguration";                          Flags: replacesameversion
+; Plugins:
+; Cleanse
+Source: "..\Source\Plugins\Blink.Plugin.Cleanse\bin\Release\Blink.Plugin.Cleanse.dll";                        DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Cleanse";              Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Cleanse\bin\Release\icon.ico";                                        DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Cleanse";              Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Cleanse\bin\Release\plugin.json";                                     DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Cleanse";              Flags: replacesameversion
+; FolderStructure
+Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\Blink.Plugin.FolderStructure.dll";        DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure";      Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\Blink.Plugin.CommonConfiguration.dll";    DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure";      Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\folder.settings.json";                    DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure";      Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\Newtonsoft.Json.dll";                     DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure";      Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\Newtonsoft.Json.xml";                     DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure";      Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\icon.ico";                                DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure";      Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\plugin.json";                             DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure";      Flags: replacesameversion
+; Spreadsheet
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Blink.Plugin.CommonConfiguration.dll";        DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Blink.Plugin.Spreadsheet.dll";                DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\EPPlus.dll";                                  DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\EPPlus.xml";                                  DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\folder.settings.json";                        DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Newtonsoft.Json.dll";                         DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Newtonsoft.Json.xml";                         DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\icon.ico";                                    DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\plugin.json";                                 DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+; GitLog
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\Blink.Plugin.GitLog.dll";                          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\EPPlus.dll";                                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\EPPlus.xml";                                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\LibGit2Sharp.dll";                                 DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\LibGit2Sharp.dll.config";                          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\LibGit2Sharp.xml";                                 DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\icon.ico";                                         DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\plugin.json";                                      DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\lib\win32\x64\git2-106a5f2.dll";                   DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog\lib\win32\x64"; Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\lib\win32\x86\git2-106a5f2.dll";                   DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog\lib\win32\x86"; Flags: replacesameversion
 
-Source: "Resources\folder.ico";                                            DestDir: "{userappdata}\Blink"; Flags: ignoreversion
-Source: "Resources\spreadsheet.ico";                                       DestDir: "{userappdata}\Blink"; Flags: ignoreversion
-Source: "Resources\lightbulb.ico";                                         DestDir: "{userappdata}\Blink"; Flags: ignoreversion
-Source: "Resources\delete.ico";                                            DestDir: "{userappdata}\Blink"; Flags: ignoreversion
-Source: "Resources\gitlog.ico";                                            DestDir: "{userappdata}\Blink"; Flags: ignoreversion
 
-Source: "..\Source\Plugins\Blink.Plugin.Cleanse\bin\Release\Blink.Plugin.Cleanse.dll";          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Cleanse"; Flags: replacesameversion
-;Source: "..\Source\Plugins\Blink.Plugin.Cleanse\bin\Release\Blink.Plugin.dll";                  DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Cleanse"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Cleanse\bin\Release\icon.ico";                          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Cleanse"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Cleanse\bin\Release\plugin.json";                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Cleanse"; Flags: replacesameversion
-
-Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\Blink.Plugin.FolderStructure.dll";          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure"; Flags: replacesameversion
-;Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\Blink.Plugin.dll";                          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\Blink.Plugin.CommonConfiguration.dll";      DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\folder.settings.json";                      DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\Newtonsoft.Json.dll";                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\Newtonsoft.Json.xml";                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\icon.ico";                                  DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\plugin.json";                               DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.FolderStructure"; Flags: replacesameversion
-
-Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Blink.Plugin.CommonConfiguration.dll";      DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-;Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Blink.Plugin.dll";                          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Blink.Plugin.Spreadsheet.dll";              DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\EPPlus.dll";                                DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\EPPlus.xml";                                DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\folder.settings.json";                      DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Newtonsoft.Json.dll";                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Newtonsoft.Json.xml";                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\icon.ico";                                  DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\plugin.json";                               DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet"; Flags: replacesameversion
-
-;Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\Blink.Plugin.dll";                          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\Blink.Plugin.GitLog.dll";                   DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\EPPlus.dll";                                DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\EPPlus.xml";                                DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\LibGit2Sharp.dll";                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\LibGit2Sharp.dll.config";                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\LibGit2Sharp.xml";                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\icon.ico";                                  DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\plugin.json";                               DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\lib\win32\x64\git2-106a5f2.dll";                               DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog\lib\win32\x64"; Flags: replacesameversion
-Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\lib\win32\x86\git2-106a5f2.dll";                               DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog\lib\win32\x86"; Flags: replacesameversion
-
-
-[Icons] 
-Name: "{group}\Blink"; Filename: "{userappdata}\Blink\Blink.Client.exe"
+;[Icons] 
+;Name: "{group}\Blink"; Filename: "{userappdata}\Blink\Blink.Client.exe"
 
 [Registry]
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink";                    ValueType: expandsz; ValueName: "MUIVerb";                                                                                         Flags: deletekey uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink";                    ValueType: expandsz; ValueName: "SubCommands";                                                                                     Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink";                    ValueType: string  ; ValueName: "Icon";            ValueData: """{userappdata}\Blink\lightbulb.ico""";                             Flags: uninsdeletekey
-
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\folder.ico""";                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Build folder structure";                                            Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1\command"; ValueType: string ;                                ValueData: """{userappdata}\Blink\Blink.Client.exe"" -a folder -d ""%1""";      Flags: uninsdeletekey
-
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\spreadsheet.ico""";                           Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Generate spreadsheet file";                                         Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2\command"; ValueType: string ;                                ValueData: """{userappdata}\Blink\Blink.Client.exe"" -a spreadsheet -d ""%1"""; Flags: uninsdeletekey
-
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\delete.ico""";                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Cleanse empty folders";                                             Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3\command"; ValueType: string ;                                ValueData: """{userappdata}\Blink\Blink.Client.exe"" -a cleanse -d ""%1""";     Flags: uninsdeletekey
-
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\gitlog.ico""";                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Git Log";                                                           Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4\command"; ValueType: string ;                                ValueData: """{userappdata}\Blink\Blink.Client.exe"" -a gitlog -d ""%1""";     Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: dword  ;  ValueName: "commandflags";    ValueData: "$00000040";                                                         Flags: uninsdeletekey
-
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\lightbulb.ico""";                             Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Open configuration file";                                           Flags: uninsdeletekey
-;Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5\command"; ValueType: string ;                                ValueData: """notepad.exe"" ""{userdocs}\Blink\CommonConfiguration\folder.settings.json""";      Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5\command"; ValueType: string ;                                ValueData: """{userdocs}\Blink\CommonConfiguration\folder.settings.json""";      Flags: uninsdeletekey
+; Main menu
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink";                    ValueType: expandsz; ValueName: "MUIVerb";                                                                                                          Flags: deletekey uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink";                    ValueType: expandsz; ValueName: "SubCommands";                                                                                                      Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink";                    ValueType: string  ; ValueName: "Icon";            ValueData: """{userappdata}\Blink\lightbulb.ico""";                                              Flags: uninsdeletekey
+; FolderStructure
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\folder.ico""";                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Build folder structure";                                                             Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd1\command"; ValueType: string ;                                ValueData: """{userappdata}\Blink\Blink.Client.exe"" -a folder -d ""%1""";                       Flags: uninsdeletekey
+; Spreadsheet
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\spreadsheet.ico""";                                            Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Generate spreadsheet file";                                                          Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd2\command"; ValueType: string ;                                ValueData: """{userappdata}\Blink\Blink.Client.exe"" -a spreadsheet -d ""%1""";                  Flags: uninsdeletekey
+; Cleanse
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\delete.ico""";                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Cleanse empty folders";                                                              Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd3\command"; ValueType: string ;                                ValueData: """{userappdata}\Blink\Blink.Client.exe"" -a cleanse -d ""%1""";                      Flags: uninsdeletekey
+; GitLog
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\gitlog.ico""";                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Git Log";                                                                            Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4\command"; ValueType: string ;                                ValueData: """{userappdata}\Blink\Blink.Client.exe"" -a gitlog -d ""%1""";                       Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd4";         ValueType: dword  ;  ValueName: "commandflags";    ValueData: "$00000040";                                                                          Flags: uninsdeletekey
+; Configuration File
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: dword  ;  ValueName: "AttributeMask";   ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                                 Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\lightbulb.ico""";                                              Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Open configuration file";                                                            Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5\command"; ValueType: string ;                                ValueData: """explorer.exe"" ""{userdocs}\Blink\CommonConfiguration\folder.settings.json""";     Flags: uninsdeletekey
                                                                                                                                                        
 [InstallDelete]
+; Remove old version of Blink
 Type: files; Name: "{userappdata}\Blink\BlinkClient.exe"
 Type: files; Name: "{userappdata}\Blink\EPPlus.dll"
 Type: files; Name: "{userappdata}\Blink\Newtonsoft.Json.dll"
