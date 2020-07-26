@@ -123,7 +123,7 @@ Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";      
 Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: dword  ;  ValueName: "AttributeValue";  ValueData: "$1";                                                                                 Flags: uninsdeletekey
 Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: string ;  ValueName: "Icon";            ValueData: """{userappdata}\Blink\lightbulb.ico""";                                              Flags: uninsdeletekey
 Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5";         ValueType: string ;  ValueName: "MUIVerb";         ValueData: "Open configuration file";                                                            Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5\command"; ValueType: string ;                                ValueData: """explorer.exe"" ""{userdocs}\Blink\CommonConfiguration\folder.settings.json""";     Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Directory\shell\Blink\shell\cmd5\command"; ValueType: string ;                                ValueData: """explorer.exe"" ""{userdocs}\Blink\CommonConfiguration""";                          Flags: uninsdeletekey
                                                                                                                                                        
 [InstallDelete]
 ; Remove old version of Blink
