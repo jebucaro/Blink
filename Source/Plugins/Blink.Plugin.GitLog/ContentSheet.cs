@@ -74,6 +74,7 @@ namespace Blink.Plugin.GitLog
             excelWorksheet.Cells[CurrentRowHeader, ColumnPosition_Message].Value = ColumnName_Message;
             excelWorksheet.Cells[CurrentRowHeader, ColumnPosition_AuthorName].Value = ColumnName_AuthorName;
             excelWorksheet.Cells[CurrentRowHeader, ColumnPosition_AuthorEmail].Value = ColumnName_AuthorEmail;
+            excelWorksheet.View.FreezePanes(CurrentRowHeader, ColumnPosition_Sha);
         }
 
         private void PrintDetailColumnTitles(ExcelWorksheet excelWorksheet)
@@ -83,6 +84,7 @@ namespace Blink.Plugin.GitLog
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_File].Value = ColumnName_File;
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Extension].Value = ColumnName_Extension;
             excelWorksheet.Cells[CurrentRowDetail, ColumnPosition_Path].Value = ColumnName_Path;
+            excelWorksheet.View.FreezePanes(CurrentRowDetail, ColumnPosition_Status);
         }
 
         private void PrintHeader(ExcelWorksheet excelWorksheet, CommitInfo commit)
@@ -140,20 +142,17 @@ namespace Blink.Plugin.GitLog
                         CurrentRowHeader++;
                     }
 
+                    PrintTable(headerSheet, CurrentRowHeader, ColumnPosition_AuthorEmail);
+                    PrintTable(detailSheet, CurrentRowDetail, ColumnPosition_Path);
+
                     if (AutoFitColumns)
                     {
                         headerSheet.Cells.AutoFitColumns();
                         detailSheet.Cells.AutoFitColumns();
                     }
 
-                    if (!ShowGridLines)
-                    {
-                        headerSheet.View.ShowGridLines = false;
-                        detailSheet.View.ShowGridLines = false;
-                    }
-
-                    PrintTable(headerSheet, CurrentRowHeader, ColumnPosition_AuthorEmail);
-                    PrintTable(detailSheet, CurrentRowDetail, ColumnPosition_Path);
+                    headerSheet.View.ShowGridLines = ShowGridLines;
+                    detailSheet.View.ShowGridLines = ShowGridLines;
 
                     excelPackage.Save();
                 };
