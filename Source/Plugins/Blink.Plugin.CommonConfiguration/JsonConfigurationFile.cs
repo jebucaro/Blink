@@ -11,7 +11,8 @@ namespace Blink.Plugin.CommonConfiguration
 {
     public class JsonConfigurationFile<T>
     {
-        protected const string DefaultConfigurationFile = "Blink\\CommonConfiguration\\folder.settings.json";
+        protected const string DefaultConfigurationFile = "folder.settings.json";
+        protected const string UserConfigurationDirectory = "Blink\\CommonConfiguration";
 
         private List<T> ItemList;
         public ReadOnlyCollection<T> ReadOnlyItemList
@@ -28,7 +29,7 @@ namespace Blink.Plugin.CommonConfiguration
         {
             ItemList = new List<T>();
 
-            string customConfigurationFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), DefaultConfigurationFile);
+            string customConfigurationFile = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), UserConfigurationDirectory), DefaultConfigurationFile);
 
             if (File.Exists(customConfigurationFile))
                 ConfigurationFile = customConfigurationFile;
