@@ -1,0 +1,11 @@
+﻿{
+	"Id": "{35AD56E1-4C95-4D54-A0A4-89C012951941}",
+	"ActionKeyword": "folder",
+	"Name": "Create folder structure",
+	"Description": "Creates a structure of folders inside current working directory, the structure is based on a configuration file.",
+	"Author": "Jonathan Búcaro",
+	"Version": "1.0",
+	"Website": "https://jonathanbucaro.com",
+	"PluginFileName": "Blink.Plugin.FolderStructure.dll",
+	"PluginIcon": "icon.ico"
+}

@@ -1,0 +1,11 @@
+﻿{
+	"Id": "{219621A5-32B7-4081-86D0-654491AA550C}",
+	"ActionKeyword": "cleanse",
+	"Name": "Cleanse empty folders",
+	"Description": "Deletes empty folders inside current working directory",
+	"Author": "Jonathan Búcaro",
+	"Version": "1.0",
+	"Website": "https://jonathanbucaro.com",
+	"PluginFileName": "Blink.Plugin.Cleanse.dll",
+	"PluginIcon":  "icon.ico"
+}

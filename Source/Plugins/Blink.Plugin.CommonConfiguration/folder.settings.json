@@ -1,0 +1,37 @@
+﻿[
+	{
+		"name": "Código Fuente",
+		"subfolders": [
+			{
+				"name": "Presentación",
+				"label": "Capa - Presentación"
+			},
+			{
+				"name": "Aplicación",
+				"label": "Capa - Aplicación"
+			},
+			{
+				"name": "Datos",
+				"label": "Capa - Datos"
+			}
+		]
+	},
+	{
+		"name": "Documentación",
+		"browsable": false,
+		"subfolders": [
+			{
+				"name": "Requerimiento"
+			},
+			{
+				"name": "Minutas"
+			},
+			{
+				"name": "Manuales"
+			},
+			{
+				"name": "Documentación Técnica"
+			}
+		]
+	}
+]
