@@ -49,6 +49,8 @@
     <ProjectReference Include="..\..\Blink.Plugin\Blink.Plugin.csproj">
       <Project>{8f493d39-4bbc-4e1c-a664-8fdded2e79d9}</Project>
       <Name>Blink.Plugin</Name>
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
     </ProjectReference>
     <ProjectReference Include="..\Blink.Plugin.CommonConfiguration\Blink.Plugin.CommonConfiguration.csproj">
       <Project>{79469d0f-5050-4395-9e35-43b95704a245}</Project>

@@ -148,8 +148,8 @@ namespace Blink.Client
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            ParseCommandLineArgs(Environment.GetCommandLineArgs());
             WindowState = FormWindowState.Minimized;
+            ParseCommandLineArgs(Environment.GetCommandLineArgs());
         }
     }
 }

@@ -50,6 +50,8 @@
     <ProjectReference Include="..\..\Blink.Plugin\Blink.Plugin.csproj">
       <Project>{8f493d39-4bbc-4e1c-a664-8fdded2e79d9}</Project>
       <Name>Blink.Plugin</Name>
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
