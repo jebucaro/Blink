@@ -10,8 +10,6 @@ Blink es una aplicación de Windows que puede realizar por medio de __plugins__ 
 + Eliminar los directorios hijos que se encuentren actualmente vacíos.
 + Listar la bitácora de los últimos 25 commits en la rama del directorio de trabajo y los archivos afectados. Una hoja para los datos de los mensajes de commit y autores, y otra para el detalle de los archivos.
 
-Se agregó una opción para abrir el archivo de configuración desde el menú contextual.
-
 El siguiente ejemplo de archivo de configuración:
 
 ```json
