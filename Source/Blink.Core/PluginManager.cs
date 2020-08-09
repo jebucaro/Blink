@@ -29,23 +29,26 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Blink.Core
 {
     public class PluginManager
     {
+        public enum SearchType
+        {
+            Id,
+            ActionKeyword
+        }
+
         private readonly string[] Directories = { Constant.PreinstalledDirectory, Constant.PluginsDirectory };
 
         public IReadOnlyList<PluginDetail> AvailablePlugins { get; private set; }
         private readonly List<PluginDuo> AllPlugins = new List<PluginDuo>();
 
-        public enum PluginSearchType
-        {
-            SearchById,
-            SearchByActionKeyword
-        }
+        private PluginDuo selectedPlugin;
+        public SearchType PluginSearchType { get; set; } = SearchType.ActionKeyword;
+        
 
         public void LoadPlugins()
         {
@@ -138,31 +141,41 @@ namespace Blink.Core
             });
         }
 
-        public void InitializePlugin(PluginSearchType pluginSearchType, string value)
+        public PluginDetail SelectPlugin(string value)
         {
-            var duo = pluginSearchType ==
-                    PluginSearchType.SearchById ?
+            selectedPlugin = PluginSearchType ==
+                    SearchType.Id ?
                         GetPluginForId(value) : GetPluginForActionKeyword(value);
 
-            duo.Plugin.Init(duo.Detail);
+            if (selectedPlugin is null)
+                throw new KeyNotFoundException($"There is no plugin with { this.PluginSearchType }: { value }");
+
+            return selectedPlugin.Detail;
         }
 
-        public void ExecutePlugin(PluginSearchType pluginSearchType, string value, string path)
+        public void InitializePlugin()
         {
-            var duo = pluginSearchType ==
-                    PluginSearchType.SearchById ?
-                        GetPluginForId(value) : GetPluginForActionKeyword(value);
+            if (selectedPlugin is null)
+                throw new NullReferenceException("There is no plugin selected");
+
+            selectedPlugin.Plugin.Init(selectedPlugin.Detail);
+        }
+
+        public void ExecutePlugin(string path)
+        {
+            if (selectedPlugin is null)
+                throw new NullReferenceException("There is no plugin selected");
 
             try
             {
-                duo.Plugin.WorkingDirectory = new DirectoryInfo(path);
+                selectedPlugin.Plugin.WorkingDirectory = new DirectoryInfo(path);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            
-            duo.Plugin.ExecuteTask();
+
+            selectedPlugin.Plugin.ExecuteTask();
         }
 
         private PluginDuo GetPluginForId(string id)
