@@ -42,6 +42,11 @@ Source: "..\Source\Blink.Client\bin\Release\CommandLine.dll";                   
 Source: "..\Source\Blink.Client\bin\Release\CommandLine.xml";                                                 DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
 Source: "..\Source\Blink.Client\bin\Release\Newtonsoft.Json.dll";                                             DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
 Source: "..\Source\Blink.Client\bin\Release\Newtonsoft.Json.xml";                                             DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\Microsoft.WindowsAPICodePack.dll";                                DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\Microsoft.WindowsAPICodePack.Shell.dll";                          DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\Microsoft.WindowsAPICodePack.xml";                                DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+Source: "..\Source\Blink.Client\bin\Release\Microsoft.WindowsAPICodePack.Shell.dll";                          DestDir: "{userappdata}\Blink";                                           Flags: replacesameversion
+
 ; assets
 Source: "Resources\folder.ico";                                                                               DestDir: "{userappdata}\Blink";                                           Flags: ignoreversion
 Source: "Resources\spreadsheet.ico";                                                                          DestDir: "{userappdata}\Blink";                                           Flags: ignoreversion

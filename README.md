@@ -10,7 +10,8 @@ Blink es una aplicación de Windows que puede realizar por medio de __plugins__ 
 + Eliminar los directorios hijos que se encuentren actualmente vacíos.
 + Listar la bitácora de los últimos 25 commits en la rama del directorio de trabajo y los archivos afectados. Una hoja para los datos de los mensajes de commit y autores, y otra para el detalle de los archivos.
 
-El siguiente ejemplo de archivo de configuración:
+## Configuración en común para folder y spreadsheet
+El siguiente es un ejemplo de archivo de configuración que se coloca en la carpeta Blink\CommonConfiguration dentro de los Documentos del usuario.
 
 ```json
 [
@@ -51,9 +52,25 @@ El siguiente ejemplo de archivo de configuración:
     }
 ]
 ```
-Creará la siguente estructura de carpetas dento de la carpeta seleccionada como carpeta de trabajo, en este caso la carpeta raíz *Ejemplo*:
 
-![Ejemplo](./ejemplo.jpg)
+## -a folder
+Creará la siguente estructura de carpetas dento de la carpeta seleccionada como carpeta de trabajo:
+
+![-a folder](./ejemplo-folder.jpg)
+
+## -a spreadsheet
+Siguiendo el ejemplo anterior, el plugin spreadsheet creará un archivo de excel con tres pestañas con el nombre de las etiquetas, en donde se listarán los detalles de los archivos que se encuentran en esas carpetas.
+
+![-a spreadsheet](./ejemplo-spreadsheet.jpg)
+
+## -a cleanse
+Esta acción eliminará todas las carpetas que no posean archivos en su interior, dentro del directorio actual de trabajo
+
+## -a gitlog
+Esta acción listará los últimos 25 commits en la rama que se encuentre activa en caso el directorio actual de trabajo sea un repositorio git
+
+![-a gitlog](./ejemplo-gitlog.jpg)
+![-a gitlog](./ejemplo-gitlog2.jpg)
 
 El proyecto se encuentra desarrollado en C# y el instalador fue realizado con Inno Setup. Se colocaron los permisos mínimos como para poder realizar la instalación sin privilegios de usuario administrador, y únicamente se instala para el usuario actual. El directorio de instalación es __%appdata%\Blink__.
 

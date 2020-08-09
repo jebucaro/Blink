@@ -24,11 +24,11 @@
 
 using Blink.Core;
 using CommandLine;
+using Microsoft.WindowsAPICodePack.Taskbar;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Blink.Client
@@ -56,7 +56,10 @@ namespace Blink.Client
             BGWorker.RunWorkerAsync();
         }
 
+        private readonly PluginManager pluginManager;
+        private readonly TaskbarManager taskbarInstance;
         private readonly NotifyIcon _notification;
+
         private const int NotificationDelay = 4500;
         private string WorkingDirectory { get; set; }
         private string Action { get; set; }
@@ -90,6 +93,9 @@ namespace Blink.Client
 
             InitializeComponent();
 
+            pluginManager = new PluginManager();
+            taskbarInstance = TaskbarManager.Instance;
+
             _notification = new NotifyIcon
             {
                 Icon = new Icon(Icon, 16, 16),
@@ -99,7 +105,6 @@ namespace Blink.Client
             _notification.BalloonTipClosed += Notification_BalloonTipClosed;
             _notification.BalloonTipClicked += Notification_BalloonTipClicked;
         }
-
 
         private void Notification_BalloonTipClicked(object sender, EventArgs e)
         {
@@ -117,8 +122,6 @@ namespace Blink.Client
 
         private void BGWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            PluginManager pluginManager = new PluginManager();
-
             if (string.IsNullOrWhiteSpace(WorkingDirectory))
                 throw new ArgumentNullException(nameof(WorkingDirectory));
 
@@ -126,29 +129,55 @@ namespace Blink.Client
                 throw new ArgumentNullException(nameof(Action));
 
             pluginManager.LoadPlugins();
-            pluginManager.InitializePlugin(PluginManager.PluginSearchType.SearchByActionKeyword, Action);
-            pluginManager.ExecutePlugin(PluginManager.PluginSearchType.SearchByActionKeyword, Action, WorkingDirectory);
+
+            var detail = pluginManager.SelectPlugin(Action);
+
+            BGWorker.ReportProgress(0, detail);
+
+            pluginManager.InitializePlugin();
+            pluginManager.ExecutePlugin(WorkingDirectory);
         }
 
         private void BGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             _notification.Visible = true;
+            taskbarInstance.SetProgressValue(100, 100);
 
             if (e.Error is null)
             {
+                taskbarInstance.SetProgressState(TaskbarProgressBarState.Normal);
                 _notification.ShowBalloonTip(NotificationDelay, "Blink", "Operation completed successfully", ToolTipIcon.Info);
             }
             else
             {
+                taskbarInstance.SetProgressState(TaskbarProgressBarState.Error);
                 _notification.ShowBalloonTip(NotificationDelay, e.Error.Source, e.Error.Message, ToolTipIcon.Error);
             }
-
-            Thread.Sleep(NotificationDelay);
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            taskbarInstance.TabbedThumbnail.SetThumbnailClip(Handle, new Rectangle(0, 0, this.Width, this.Height));
+            taskbarInstance.SetProgressState(TaskbarProgressBarState.Indeterminate);
+            WindowState = FormWindowState.Minimized;
+
             ParseCommandLineArgs(Environment.GetCommandLineArgs());
+        }
+
+        private void BGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            var detail = (Plugin.PluginDetail)e.UserState;
+
+            if (System.IO.File.Exists(detail.PluginIconPath))
+                try
+                {
+                    taskbarInstance.SetOverlayIcon(new Icon(detail.PluginIconPath), detail.Name);
+                }
+                catch (Exception)
+                {
+                    // ¯\_(ツ)_/¯
+                }
+
         }
     }
 }
