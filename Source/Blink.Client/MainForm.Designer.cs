@@ -34,7 +34,9 @@
             // 
             // BGWorker
             // 
+            this.BGWorker.WorkerReportsProgress = true;
             this.BGWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWorker_DoWork);
+            this.BGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWorker_ProgressChanged);
             this.BGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWorker_RunWorkerCompleted);
             // 
             // MainForm
@@ -42,14 +44,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(384, 361);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ControlBox = false;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Blink";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResumeLayout(false);
 

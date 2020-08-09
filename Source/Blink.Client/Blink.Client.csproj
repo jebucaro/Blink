@@ -42,16 +42,17 @@
     <Reference Include="CommandLine, Version=2.8.0.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.2.8.0\lib\net45\CommandLine.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainForm.cs">
@@ -93,6 +94,10 @@
     <ProjectReference Include="..\Blink.Core\Blink.Core.csproj">
       <Project>{f737502a-a489-42e5-80fc-4dd451e1b514}</Project>
       <Name>Blink.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blink.Plugin\Blink.Plugin.csproj">
+      <Project>{8f493d39-4bbc-4e1c-a664-8fdded2e79d9}</Project>
+      <Name>Blink.Plugin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
