@@ -71,6 +71,8 @@ Source: "..\Source\Plugins\Blink.Plugin.FolderStructure\bin\Release\plugin.json"
 Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Blink.Plugin.CommonConfiguration.dll";        DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
 Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Blink.Plugin.Spreadsheet.dll";                DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
 Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\EPPlus.dll";                                  DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\EPPlus.Interfaces.dll";                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\EPPlus.System.Drawing.dll";                   DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
 Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\EPPlus.xml";                                  DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
 Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\folder.settings.json";                        DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
 Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\Newtonsoft.Json.dll";                         DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.Spreadsheet";          Flags: replacesameversion
@@ -80,6 +82,8 @@ Source: "..\Source\Plugins\Blink.Plugin.Spreadsheet\bin\Release\plugin.json";   
 ; GitLog
 Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\Blink.Plugin.GitLog.dll";                          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
 Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\EPPlus.dll";                                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\EPPlus.Interfaces.dll";                            DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
+Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\EPPlus.System.Drawing.dll";                        DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
 Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\EPPlus.xml";                                       DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
 Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\LibGit2Sharp.dll";                                 DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
 Source: "..\Source\Plugins\Blink.Plugin.GitLog\bin\Release\LibGit2Sharp.dll.config";                          DestDir: "{userappdata}\Blink\Plugins\Blink.Plugin.GitLog";               Flags: replacesameversion
